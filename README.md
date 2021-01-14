@@ -81,10 +81,43 @@ truffle compile
 ```
 
 ```
-truffle migrate --network [choose network] --retry
+truffle migrate --network [choose network] --reset
 ```
 
 
 #Project Source Info
 
 the files provided in this repository use truffle for the contract migration and Vue + Vuetify for the web front end... if you need more info read the npm package JSON (though it needs a thourough cleanup haha)
+
+## rough draft of web app FEATURES
+
+WEB
+features:
+	-ledget/web wallet connect/ + others
+	-manage transactions / arrange
+	-account statistics
+		detailed account spendings/earnings
+		extract of accounts
+		cost of service
+	-account funds
+		value of savings acc
+		value of debit account
+		how much invested
+		+lots of other cool little details
+	-investments
+		portfolio
+		staking
+		liquidity provider
+		investment returns
+	-write nfc cards
+	-create wallets for the nfc cards
+	-manage multiple keys at once
+	-never store user private key... EVER
+	-Fiat GateWay
+	-Multiple Exchanges
+	-Multiple Liquidity Pools
+	-Valitador manager (simplified terms and usage while providing more stats )
+	-Delegator manager (same as above)
+
+
+
