@@ -1,0 +1,36 @@
+const Migrations = artifacts.require("Migrations");
+const userFactory = artifacts.require("UserFactory");
+const userManager = artifacts.require("UserManager");
+
+const userWallet = artifacts.require("UserWalletContract");
+
+const userBudget = artifacts.require("UserBudgetContract");
+
+const userToken = artifacts.require("UserTokenContract");
+
+//const User = artifacts.require("User");
+
+module.exports = async function (deployer) {
+  deployer.deploy(Migrations);
+
+  await deployer.deploy(userWallet)
+
+  		await deployer.deploy(userBudget)
+
+  		await deployer.deploy(userToken)
+
+  		await deployer.deploy(userManager, userToken.address, userBudget.address, userWallet.address)
+
+  		await deployer.deploy(userFactory, userManager.address)
+
+  .then(
+  	async function () {
+  		console.log(`   export BASEuserWallet=${userWallet.address};\n`);
+  		console.log(`   export BASEuserBudget=${userBudget.address};\n`);
+  		console.log(`   export BASEuserToken=${userToken.address};\n`);
+  		console.log(`   export USERMANAGER=${userManager.address};\n`);
+  		console.log(`   export USERFACTORY=${userFactory.address};\n`);
+
+  	})
+  //deployer.deploy(User);
+};

@@ -1,0 +1,219 @@
+"use strict";
+/**
+ * Main store module
+ * @module store
+ */
+
+import Vue from "vue";
+import Vuex from "vuex";
+import createLogger from "vuex/dist/logger";
+import merge from "lodash.merge";
+import * as getters from "./getters";
+import modules from "./modules";
+
+Vue.use(Vuex);
+
+const getLegerModule = () => import("./modules/ledger");
+let isLegerModuleRegistered = false;
+
+/**
+ * Module Store
+ * @param opts
+ * @returns {Vuex.Store}
+ */
+export default (opts = {}) => {
+  const store = new Vuex.Store({
+    getters,
+    // strict: true,
+    modules: modules(opts),
+    actions: {
+      loadPersistedState,
+      loadLegerModule: () => {
+        if (!isLegerModuleRegistered) {
+          return getLegerModule().then(legerModule => {
+            store.registerModule("ledger", legerModule.default());
+            isLegerModuleRegistered = true;
+          });
+        } else {
+          return Promise.resolve();
+        }
+      }
+    },
+    plugins: [createLogger()]
+  });
+
+  let pending = null;
+  store.subscribe((mutation, state) => {
+    /* istanbul ignore next */
+    pending = storeUpdateHandler(mutation, state, pending);
+  });
+
+  store.subscribe(mutation => {
+    if (mutation.type === "setConnected") {
+      store.dispatch("queryWalletBalances");
+      store.dispatch(`resetSelectedValidators`);
+
+      Promise.all([
+        store.dispatch("getDelegates")
+        // store.dispatch("getValidators")
+      ]).then(() => store.dispatch("getRewardsFromMyValidators"));
+    }
+  });
+
+  store.subscribe(mutation => {
+    if (mutation.type === "setUserAddress") {
+      store.dispatch("resetRewards");
+
+      store
+        .dispatch("getDelegates")
+        .then(() => store.dispatch("getRewardsFromMyValidators"));
+    }
+  });
+
+  store.subscribe(mutation => {
+    if (mutation.type === "setSessionType") {
+      if (mutation.payload === "leger" && !isLegerModuleRegistered) {
+        getLegerModule().then(legerModule => {
+          store.registerModule("ledger", legerModule.default());
+          isLegerModuleRegistered = true;
+        });
+      }
+    }
+  });
+
+  return store;
+};
+
+/*
+ * We want to store a sub-state of the state to local storage to serve data faster for the user.
+ * This function is triggered on all mutations.
+ */
+export function storeUpdateHandler(mutation, state, pending) {
+  // since persisting the state is costly we should only do it on mutations that change the data
+  const updatingMutations = [
+    `setWalletBalances`,
+    `setWalletHistory`,
+    `setCommittedDelegation`,
+    `setUnbondingDelegations`,
+    `setDelegates`,
+    `setStakingParameters`,
+    `setPool`,
+    `setProposal`,
+    `setProposalDeposits`,
+    `setProposalVotes`,
+    `setProposalTally`,
+    `setGovParameters`,
+    `setTotalRewards`,
+    `setDelegationRewards`,
+    `setDistributionParameters`
+  ];
+
+  if (updatingMutations.indexOf(mutation.type) === -1) return;
+
+  // if the user is logged in cache the balances and the tx-history for that user
+  if (!state.session.address) return;
+
+  // throttle updates so we don't write to disk on every mutation
+  // pending is the last updates setTimeout
+  if (pending) {
+    clearTimeout(pending);
+  }
+  return setTimeout(() => {
+    persistState(state);
+  }, 3000);
+}
+
+/**
+ * Persist the state passed as parameter
+ * Only persists a subset of the state
+ * @param state
+ */
+function persistState(state) {
+  const cachedState = JSON.stringify({
+    connection: {
+      network: state.connection.network
+    },
+    session: {
+      address: state.session.address
+    }
+  });
+  // Store the state object as a JSON string
+  localStorage.setItem(getStorageKey(state), cachedState);
+}
+
+/**
+ * Get a storage key
+ * @param state
+ * @returns {string}
+ */
+export function getStorageKey(state) {
+  const chainId = state.connection.lastHeader.chain_id;
+  const address = state.session.address;
+
+  // return `store_${chainId}_${address}`
+  return `store_account_settings`;
+}
+
+/**
+ * load persisted state
+ * @param state
+ * @param commit
+ */
+export async function loadPersistedState({ state, dispatch }) {
+  // if (!state.connection.lastHeader || !state.connection.lastHeader.chain_id) {
+  //   await new Promise(resolve => setTimeout(resolve, 500))
+  //   dispatch(`loadPersistedState`)
+  //   return
+  // }
+
+  const storageKey = getStorageKey(state);
+  let cachedState;
+  try {
+    cachedState = JSON.parse(localStorage.getItem(storageKey));
+  } catch (err) {
+    console.error(`Couldn't parse the cached state`);
+  }
+  if (cachedState) {
+    // Replace the state object with the stored state
+    merge(state, cachedState, {
+      // set loading indicators to false
+      transactions: {
+        loaded: true,
+        loading: false
+      },
+      wallet: {
+        loaded: true,
+        loading: false
+      },
+      delegates: {
+        loaded: true,
+        loading: false
+      },
+      delegation: {
+        loaded: true,
+        loading: false
+      },
+      distribution: {
+        loaded: true,
+        loading: false
+      },
+      proposals: {
+        loaded: true,
+        loading: false
+      },
+      pool: {
+        loaded: true,
+        loading: false
+      },
+      governanceParameters: {
+        loaded: true,
+        loading: false
+      },
+      stakingParameters: {
+        loaded: true,
+        loading: false
+      }
+    });
+    this.replaceState(state);
+  }
+}
