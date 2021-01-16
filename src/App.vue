@@ -1,7 +1,11 @@
 <template>
   <v-app id="open.fi">
+    <div class="error small">
+      This is in active developement. Please Dont put money on the contracts you
+      encouter here.
+    </div>
     <div v-if="loggedIn">
-      <v-app-bar app class="green lighten-2">
+      <v-app-bar app fixed class="green lighten-2">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
         <v-toolbar-title>Open.fi</v-toolbar-title>
@@ -15,9 +19,11 @@
         v-model="drawer"
         fixed
         temporary
-        class="navigation green lighten-2"
+        class="navigation"
+        bg-dark
       >
-        <div class="list-group list-group-flush">
+        <div class="list-group list-group-flush ">
+          <div class="green lighten-2 pt-8"><center>OpenFi</center></div>
           <a
             ><router-link to="/" class="list-group-item list-group-item-action "
               >Dashboard</router-link
@@ -33,14 +39,14 @@
           <a
             ><router-link
               to="/Card"
-              class="list-group-item list-group-item-action bg-light"
+              class="list-group-item list-group-item-action "
               >Card</router-link
             ></a
           >
           <a
             ><router-link
               to="/Merchant"
-              class="list-group-item list-group-item-action bg-light"
+              class="list-group-item list-group-item-action"
               >Merchant</router-link
             ></a
           >
@@ -48,7 +54,7 @@
           <a
             ><router-link
               to="/Swap"
-              class="list-group-item list-group-item-action bg-light"
+              class="list-group-item list-group-item-action "
               >Swap</router-link
             ></a
           >
@@ -99,64 +105,41 @@
     </div>
 
     <v-container class="logincard" v-if="!loggedIn">
-      <v-container fluid pa-0>
-        <v-row align="center" justify="center" style="height:100vh" dense>
+      <v-container pa-0>
+        <v-row align="center" justify="center" style="height:95vh">
           <v-col
-            cols="6"
-            lg="4"
-            md="4"
+            cols="8"
+            lg="8"
+            md="8"
             class="white lighten-2 fill-height d-flex flex-column justify-center align-center"
           >
-            <v-card
-              class="elevation-20 rounded-xl"
-              tile
-              height="500"
-              width="300"
-            >
+            <v-card class="elevation-20 rounded-xl" height="500" :width="width">
               <v-card-text>
-                <h2 align="center" class="align-center">Open.fi</h2>
+                <h2 align="center" class="align-center" text-color="green">
+                  OpenFi
+                </h2>
 
-                <br />
-                <center>login :</center>
-                <br />
+                <center class="pt-10"><b>Sign in :</b></center>
                 <br />
                 <v-row>
-                  <v-col
-                    cols="2"
-                    lg="4"
-                    md="4"
-                    class="white lighten-2 fill-height d-flex flex-column justify-center align-center"
-                  >
-                    <LedgerWalletLogin/>
-                  </v-col>
-                  <v-col
-                    cols="2"
-                    lg="4"
-                    md="4"
-                    class="white lighten-2 fill-height d-flex flex-column justify-center align-center"
-                  >
-                    <v-img
-                      src="./assets/mathwallet.png"
-                      alt=""
-                      contain
-                      height="50px"
-                      width="50px"
-                    >
-                    </v-img>
-                  </v-col>
-                  <OneWalletLogin />
+                  <LedgerWalletLogin class="center" />
+
+                  <OneWalletLogin class="center" />
                 </v-row>
                 <br /><br />
                 <v-divider
                   class=" d-flex fill-height justify-center align-center"
                 ></v-divider>
 
-                <center>or</center>
-                <br />
-                <br />
-                <createAccount/>
+                <migrate />
 
-                
+                <v-divider
+                  class=" d-flex fill-height justify-center align-center"
+                ></v-divider>
+                <createAccount />
+                <v-divider
+                  class=" d-flex fill-height justify-center align-center"
+                ></v-divider>
               </v-card-text>
             </v-card>
           </v-col>
@@ -170,6 +153,7 @@
 import OneWalletLogin from "./components/OneWalletLogin.vue";
 import LedgerWalletLogin from "./components/LedgerWalletLogin.vue";
 import createAccount from "./components/createAccount.vue";
+import migrate from "./components/migrate.vue";
 import store from "./store";
 
 export default {
@@ -178,20 +162,20 @@ export default {
   components: {
     OneWalletLogin,
     LedgerWalletLogin,
-    createAccount
+    createAccount,
+    migrate
   },
   props: {},
-  methods:{
-    logout: async function(){
+  methods: {
+    logout: async function() {
       await window.onewallet.forgetIdentity();
       store.commit("hasSignedIn", false);
-    },
+    }
   },
 
   data() {
     return {
-      drawer: null,
-
+      drawer: null
     };
   },
   computed: {
@@ -199,6 +183,21 @@ export default {
     loggedIn: function() {
       // `this` points to the vm instance
       return store.state.signedIn;
+    },
+    width() {
+      switch (this.$vuetify.breakpoint.name) {
+        case "xs":
+          return;
+        case "sm":
+          return "100px";
+        case "md":
+          return "300px";
+        case "lg":
+          return 275;
+        case "xl":
+          return 300;
+      }
+      return 0;
     }
   }
 };

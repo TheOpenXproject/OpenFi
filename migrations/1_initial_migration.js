@@ -12,22 +12,22 @@ const userToken = artifacts.require("UserTokenContract");
 
 module.exports = async function (deployer) {
   deployer.deploy(Migrations);
-
+/*
   await deployer.deploy(userWallet)
 
   		await deployer.deploy(userBudget)
 
   		await deployer.deploy(userToken)
-
-  		await deployer.deploy(userManager, userToken.address, userBudget.address, userWallet.address)
+*/
+  		await deployer.deploy(userManager)
 
   		await deployer.deploy(userFactory, userManager.address)
 
   .then(
   	async function () {
-  		console.log(`   export BASEuserWallet=${userWallet.address};\n`);
-  		console.log(`   export BASEuserBudget=${userBudget.address};\n`);
-  		console.log(`   export BASEuserToken=${userToken.address};\n`);
+// 		console.log(`   address public budgetImplementationContract = ${userWallet.address};\n`);
+ // 		console.log(`   address public walletImplementationContract = ${userBudget.address};\n`);
+ // 		console.log(`   address public tokenImplementationContract = ${userToken.address};\n`);
   		console.log(`   export USERMANAGER=${userManager.address};\n`);
   		console.log(`   export USERFACTORY=${userFactory.address};\n`);
 

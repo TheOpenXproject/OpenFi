@@ -127,9 +127,8 @@ export default {
         });
       this.loaded = true;
     } catch (e) {
-      console.error("help" + e);
+      console.error("error : " + e);
     }
-    console.log(this.chartdata);
   }
 };
 </script>

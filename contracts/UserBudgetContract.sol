@@ -1,29 +1,16 @@
 pragma solidity ^0.5.0;
 pragma experimental ABIEncoderV2; 
-    contract Ownable {
-  address public owner;
 
-  constructor() internal{
-    owner = msg.sender;
-  }
-
-  modifier onlyOwner() {
-    if (msg.sender == owner)
-      _;
-  }
-
-   function transferOwnership(address newOwner) onlyOwner public{
-    if (newOwner != address(0)) owner = newOwner;
-  }
-
-}
     
-    contract UserBudgetContract is Ownable{
+    contract UserBudgetContract {
     // Budget context
+    address owner;
     string[1][] txcat;
    
     uint arrayLength=0;
-    
+             function initialize(address _owner) public  {
+              owner = _owner;
+    }
     mapping(string => string) public mappedtxCategories;
     
     function setTxCategory(string[2] memory _txid_cat) public payable {
@@ -32,10 +19,10 @@ pragma experimental ABIEncoderV2;
        // mappedtxCategories[txid] = arrayLength;
       
     }
-
-         function initialize(address _owner) public  {
-              Ownable(_owner);
-    }
+    function getContractAddr() public view returns (address){
+        
+        return address(this);
+}
 
     function getTxCategory(string memory txid) public returns(string memory)
     {

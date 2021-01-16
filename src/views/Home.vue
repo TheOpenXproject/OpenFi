@@ -24,8 +24,8 @@
               </v-row>
               <v-row>
                 <v-col cols="2" sm="6" md="4">
-                  <v-btn fab dark large class="green lighten-2"> {{ i }} </v-btn
-                  >| 3.95$
+                  <v-btn fab dark large class="green lighten-2"> los </v-btn>|
+                  3.95$
                 </v-col>
               </v-row>
             </v-container>

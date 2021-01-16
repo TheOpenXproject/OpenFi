@@ -19,7 +19,7 @@ export default new Vuex.Store({
     s2: null,
     s3: null,
     totatonebal: null,
-    OPENFI: "0x7131B60D6610DC7Fe10d1DB9Bf69cb2bDa006AbD",
+    OPENFI: "0xD605092887eB35fD4d5e1b703f50dd65CE13b2ed",
     userManagerAddr: null,
     userWalletAddr: null,
     userBudgetAddr: null,

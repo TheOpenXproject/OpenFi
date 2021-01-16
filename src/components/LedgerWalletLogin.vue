@@ -1,12 +1,13 @@
 <template>
   <div class="LedgerWalletLogin">
-    <v-btn v-on:click="initLedgerWallet">
+    <v-btn class="mx-2" fab dark text large color="white">
       <v-img
         src="../assets/ledger.png"
+        v-on:click="initLedgerWallet"
         alt=""
         contain
-        height="50px"
-        width="50px"
+        height="40px"
+        width="40px"
       >
       </v-img>
     </v-btn>

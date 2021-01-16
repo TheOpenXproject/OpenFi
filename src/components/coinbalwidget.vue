@@ -5,12 +5,7 @@
       </v-progress-circular>
     </div>
 
-    <doughnut
-      v-if="loaded"
-      :chartdata="chartdata"
-      :options="options"
-      height="300px"
-    />
+    <doughnut v-if="loaded" :chartdata="chartdata" :options="options" />
   </div>
 </template>
 
@@ -18,7 +13,7 @@
 import store from "../store";
 import hmy from "../javascript/hmy";
 
-const { Units, numToStr, fromWei } = require("@harmony-js/utils");
+const { Units, numToStr, fromWei, hexToNumber } = require("@harmony-js/utils");
 const { BN } = require("@harmony-js/crypto");
 import doughnut from "./charts/doughnutChart.vue";
 
@@ -34,8 +29,7 @@ export default {
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false,
-        width: "250px"
+        maintainAspectRatio: false
       },
       chartColors: [
         "#EF5350",
@@ -133,11 +127,13 @@ export default {
     try {
       const dataarray = new Array();
       const tokenname = new Array();
-      hmy.blockchain.getBalance({ address: store.state.address }).then(() => {
-        dataarray.push(5); //fromWei(hexToNumber(response.result), Units.one)
-        tokenname.push("One");
-        this.chartdata.labels.push("ONE");
-      });
+      hmy.blockchain
+        .getBalance({ address: store.state.address })
+        .then(response => {
+          dataarray.push(fromWei(hexToNumber(response.result), Units.one)); //
+          tokenname.push("One");
+          this.chartdata.labels.push("ONE");
+        });
 
       var i = 1;
 
@@ -147,9 +143,7 @@ export default {
             if (tokenBalance > 0.000000000001) {
               this.chartdata.labels.push(this.tokenList.tokenName[i]);
               dataarray.push(tokenBalance);
-              console.log("bal : " + tokenBalance + "i : " + i);
               tokenname.push(this.tokenList.tokenName[i]);
-              console.log("push token : " + this.tokenList.tokenName[i]);
             }
           }
         );
@@ -160,7 +154,6 @@ export default {
         backgroundColor: this.chartColors,
         data: dataarray
       });
-      console.log(this.chartdata);
       this.loaded = true;
     } catch (error) {
       console.error("coinbalwidget : " + error);

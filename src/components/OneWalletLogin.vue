@@ -1,6 +1,6 @@
 <template>
   <div class="OneWalletLogin">
-    <v-btn class="mx-2" fab dark large color="gray" v-on:click="initOneWallet">
+    <v-btn class="mx-2" fab dark large color="white" v-on:click="initOneWallet">
       <v-img src="../assets/one.png" alt="" contain height="50px" width="50px">
       </v-img>
     </v-btn>
@@ -41,8 +41,6 @@ export default {
       // `event` is the native DOM event
     },
     getUserContracts: async function(wallet) {
-      console.log(fromBech32("one1sw7hfgr4ns8sa75ssxx75rt0rvwau6atkacx82"));
-      console.log(fromBech32("one1l4m0c3zkgkz3z555vhatgpt2c59l0k4z9vyf22"));
       const zeroxAddr = fromBech32(store.state.address);
 
       const unattachedContract = await this.initializeContract(

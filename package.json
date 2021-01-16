@@ -13,6 +13,7 @@
     "@harmony-utils/wallets": "^0.0.1",
     "@harmony-utils/wrappers": "^0.0.1",
     "@ledgerhq/hw-transport-webusb": "^5.38.0",
+    "@openzeppelin/upgrades": "^2.8.0",
     "@vue/cli": "^4.5.9",
     "bootstrap": "^4.5.3",
     "bootstrap-vue": "^2.21.1",

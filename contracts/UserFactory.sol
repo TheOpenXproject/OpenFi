@@ -1,34 +1,18 @@
 pragma solidity ^0.5.0;
 import "@openzeppelin/upgrades/contracts/upgradeability/ProxyFactory.sol";
-contract Ownable {
-  address public owner;
-
-  constructor() internal{
-    owner = msg.sender;
-  }
-
-  modifier onlyOwner() {
-    if (msg.sender == owner)
-      _;
-  }
-
-   function transferOwnership(address newOwner) onlyOwner public{
-    if (newOwner != address(0)) owner = newOwner;
-  }
-
-}
+import "@openzeppelin/upgrades/contracts/ownership/Ownable.sol";
 
 
-
-contract UserFactory is ProxyFactory, Ownable {
+contract UserFactory is ProxyFactory {
     
     
     address public implementationContract;
     mapping(address => address) public usercontract;
+    address owner;
     uint usercount = 0;
     constructor (address _implementationContract) public {
         implementationContract = _implementationContract;
-        Ownable(msg.sender);
+        owner = msg.sender;
     }
     
     function createUser(bytes memory _data) public {
@@ -46,8 +30,7 @@ contract UserFactory is ProxyFactory, Ownable {
 
     }
       function getUserContractAddress(address _addr) public view returns (address){
-        //address sender = msg.sender;
-        //require(_addr == sender, "Access Denied: You Cant Access other peoples' contract");
+        //require(msg.sender == owner, "Access Denied: You Cant Access other peoples' contract");
         return usercontract[_addr];
     }
 }

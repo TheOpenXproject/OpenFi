@@ -1,24 +1,10 @@
 pragma solidity ^0.5.0;
 pragma experimental ABIEncoderV2; 
-contract Ownable {
-  address public owner;
+ 
 
-  constructor() internal{
-    owner = msg.sender;
-  }
-
-  modifier onlyOwner() {
-    if (msg.sender == owner)
-      _;
-  }
-
-   function transferOwnership(address newOwner) onlyOwner public{
-    if (newOwner != address(0)) owner = newOwner;
-  }
-
-}
     
-contract UserWalletContract is Ownable{
+contract UserWalletContract{
+    address owner;
     mapping(address => uint) public balances;
     string[] walletName;
     address[] walletAddr;
@@ -28,10 +14,13 @@ contract UserWalletContract is Ownable{
     
     mapping(address => uint) public arrayIndex;
 
-   function initialize(address _owner) public  {
-    Ownable(_owner);
-  }
-    
+       function getContractAddr() public view returns (address){
+        
+        return address(this);
+    }
+         function initialize(address _owner) public  {
+              owner = owner;
+    }
     function getAllWallets() public returns(string[] memory, address[] memory , string[] memory, bool[] memory, uint)
     {
         

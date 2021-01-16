@@ -34,7 +34,7 @@ module.exports = {
         const newAcc = truffleProvider.addByPrivateKey(local_private_key);
         truffleProvider.setSigner(newAcc);
         return truffleProvider;
-      },
+      }
     },
     testnet: {
       network_id: "2", // Any network (default: none)
@@ -48,7 +48,7 @@ module.exports = {
         const newAcc = truffleProvider.addByPrivateKey(testnet_private_key);
         truffleProvider.setSigner(newAcc);
         return truffleProvider;
-      },
+      }
     },
     mainnet0: {
       network_id: "1", // Any network (default: none)
@@ -62,20 +62,20 @@ module.exports = {
         const newAcc = truffleProvider.addByPrivateKey(mainnet_private_key);
         truffleProvider.setSigner(newAcc);
         return truffleProvider;
-      },
-    },
-  },compilers: {
+      }
+    }
+  },
+  compilers: {
     solc: {
       version: "^0.5.3", // A version or constraint - Ex. "^0.5.0"
-                         // Can also be set to "native" to use a native solc
+      // Can also be set to "native" to use a native solc
       docker: false, // Use a version obtained through docker
-      parser: "solcjs",  // Leverages solc-js purely for speedy parsing
+      parser: "solcjs", // Leverages solc-js purely for speedy parsing
       settings: {
         optimizer: {
           enabled: false,
-          runs: 1   // Optimize for how many times you intend to run the code
+          runs: 1 // Optimize for how many times you intend to run the code
         }
-        
       }
     }
   }

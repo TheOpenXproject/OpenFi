@@ -139,7 +139,6 @@ export default class HarmonyApp {
         const p2 = i === chunks.length - 1 ? CMDS.P2_FINISH : CMDS.P2_SIGNHASH;
         // eslint-disable-next-line
                 resp = await this.transport.send(CLA, INS.SIGN_STAKING, p1, p2, chunks[i]);
-      
       }
     } catch (err) {
       return processErrorResponse(resp);
