@@ -86,7 +86,7 @@ import store from "../store";
 import hmy from "../javascript/hmy";
 import OneWallet from "../javascript/wallet.js";
 
-import contract from "../../build/contracts/UserBudgetContract.json";
+import contract from "../../build/contracts/UserBudgetContract.json"; //this is up to date when it loads (call fuctions work elwere like this Just in case))
 //var fs = require("fs");
 export default {
   name: "addCategory",
@@ -107,8 +107,8 @@ export default {
       };
       const unattachedContract = await this.initializeContract();
       const contract = wallet.attachToContract(unattachedContract);
-      await contract.methods.setTxCategory(str).send(options);
-      var cat = contract.methods.getTxCategory("0xa0274a3445b18b6906864a529a0427c3cc0da61e4358e754a3d55832021bf602").call();
+      await contract.methods.setTxCategory(str).send(options); //this passes
+      var cat = contract.methods.getTxCategory("0xa0274a3445b18b6906864a529a0427c3cc0da61e4358e754a3d55832021bf602").call(); //this does not
       console.log(cat)
     },
     initializeContract: async function() {

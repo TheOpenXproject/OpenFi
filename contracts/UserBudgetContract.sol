@@ -6,9 +6,8 @@ contract UserBudgetContract {
     // Budget context
     address owner;
     string[1][] txcat;
-    string[500] categories;
-    string[500] txids;
-    uint arrCount = 0;
+    string[] txids;
+    string[] categories;
 
 
 
@@ -20,21 +19,17 @@ contract UserBudgetContract {
 
     function setTxCategory(string[2] memory _txid_cat) public {
         mappedtxCategories[_txid_cat[0]] = _txid_cat[1];
-        categories[arrCount] = _txid_cat[0];
-        categories[arrCount] = _txid_cat[1];
-        arrCount += 1;
-
     }
     function getContractAddr() public view returns (address){
         address thisaddr = address(this);
         return thisaddr;
     }
-    function getAllCategories() public view returns(string[500] memory){
-        string[500] memory _allcat = categories;
+    function getAllCategories() public view returns(string[] memory){
+        string[] memory _allcat = categories;
         return _allcat;
     }
-    function getAllTxids() public view returns(string[500] memory){
-        string[500] memory _alltx = txids;
+    function getAllTxids() public view returns(string[] memory){
+        string[] memory _alltx = txids;
         return _alltx;
 
     }
