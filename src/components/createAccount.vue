@@ -234,6 +234,7 @@ export default {
 
       //store.commit("hasSignedIn", true);
       store.commit("setUserAddress", wallet.address);
+      store.commit("setUserWallet", wallet);
       //alert("Welcome Back : " + store.state.address + "!");
       await this.createManager();
       // `event` is the native DOM event
@@ -247,26 +248,25 @@ export default {
       const options1 = { gasPrice: "0x3B9ACA00" };
       let options = {
         gasPrice: 1000000000,
-        gasLimit: 75000
+        gasLimit: 140000
       };
       const web3 = new Web3();
       const zeroxAddr = fromBech32(store.state.address);
+
+      console.log(zeroxAddr)
       var params = web3.eth.abi.encodeFunctionCall(
         {
           name: "initialize",
           type: "function",
           inputs: [
-            {
-              type: "string",
-              name: "_name"
-            },
+
             {
               type: "address",
               name: "_data"
             }
           ]
         },
-        ["Hello Worlds", zeroxAddr]
+        [zeroxAddr]
       );
       const data = params;
       console.log(data);
@@ -277,13 +277,13 @@ export default {
       const contract = wallet.attachToContract(unattachedContract);
       const gas = await contract.methods.createUser(data).estimateGas(options1);
       console.log(gas);
-      const value = await contract.methods.createUser(data).send(options);
+      await contract.methods.createUser(data).send(options);
 
       const manageraddr = await contract.methods
         .getUserContractAddress(zeroxAddr)
         .call();
 
-      console.log("value address : " + value);
+      console.log("value address : " + manageraddr);
       store.commit("setUserManagerAddr", manageraddr);
 
       this.createTokenContract();
@@ -298,16 +298,6 @@ export default {
       const zeroxAddr = fromBech32(store.state.address);
       const web3 = new Web3();
 
-      const unattachedUserFactoryContract = await this.initializeContract(
-        userFactoryContract,
-        store.state.OPENFI
-      );
-      const userFactoryContract1 = wallet.attachToContract(
-        unattachedUserFactoryContract
-      );
-      const manageraddr = await userFactoryContract1.methods
-        .getUserContractAddress(zeroxAddr)
-        .call();
 
       var data = web3.eth.abi.encodeFunctionCall(
         {
@@ -325,12 +315,12 @@ export default {
       const options1 = { gasPrice: "0x3B9ACA00" };
       let options = {
         gasPrice: 1000000000,
-        gasLimit: 25000
+        gasLimit: 100000
       };
-      console.log("UserManager address Token: " + manageraddr);
+      console.log("UserManager address Token: " + store.state.userManagerAddr);
       const unattachedUserManagerContract = await this.initializeContract(
         userManagerContract,
-        manageraddr
+        store.state.userManagerAddr
       );
       const contract = wallet.attachToContract(unattachedUserManagerContract);
       const gas = await contract.methods
@@ -354,17 +344,6 @@ export default {
       const zeroxAddr = fromBech32(store.state.address);
       const web3 = new Web3();
 
-      const unattachedUserFactoryContract = await this.initializeContract(
-        userFactoryContract,
-        store.state.OPENFI
-      );
-      const userFactoryContract1 = wallet.attachToContract(
-        unattachedUserFactoryContract
-      );
-      const manageraddr = await userFactoryContract1.methods
-        .getUserContractAddress(zeroxAddr)
-        .call();
-
       var data = web3.eth.abi.encodeFunctionCall(
         {
           name: "initialize",
@@ -381,12 +360,11 @@ export default {
       const options1 = { gasPrice: "0x3B9ACA00" };
       let options = {
         gasPrice: 1000000000,
-        gasLimit: 25000
+        gasLimit: 100000
       };
-      console.log("UserManager address Token: " + manageraddr);
       const unattachedUserManagerContract = await this.initializeContract(
         userManagerContract,
-        manageraddr
+        store.state.userManagerAddr
       );
       const contract = wallet.attachToContract(unattachedUserManagerContract);
       const gas = await contract.methods
@@ -411,16 +389,6 @@ export default {
       await wallet.signin();
       const zeroxAddr = fromBech32(store.state.address);
       const web3 = new Web3();
-      const unattachedUserFactoryContract = await this.initializeContract(
-        userFactoryContract,
-        store.state.OPENFI
-      );
-      const userFactoryContract1 = wallet.attachToContract(
-        unattachedUserFactoryContract
-      );
-      const manageraddr = await userFactoryContract1.methods
-        .getUserContractAddress(zeroxAddr)
-        .call();
 
       var data = web3.eth.abi.encodeFunctionCall(
         {
@@ -438,12 +406,12 @@ export default {
       const options1 = { gasPrice: "0x3B9ACA00" };
       let options = {
         gasPrice: 1000000000,
-        gasLimit: 25000
+        gasLimit: 100000
       };
-      console.log("UserManager address Token: " + manageraddr);
+
       const unattachedUserManagerContract = await this.initializeContract(
         userManagerContract,
-        manageraddr
+        store.state.userManagerAddr
       );
       const contract = wallet.attachToContract(unattachedUserManagerContract);
       const gas = await contract.methods

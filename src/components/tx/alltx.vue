@@ -17,8 +17,11 @@
           <td class="">{{ item.to }}</td>
           <td class="">{{ item.value }}</td>
 
-          <td class="">
-            {{ item.category }}
+          <td class="" v-if="item.category != null">
+            {{ item.category }} 
+          </td>
+          <td class="" v-if="item.category == null">
+            <addCategory :item="item"/>
           </td>
         </tr>
       </template>
@@ -28,17 +31,22 @@
 
 <script>
 import store from "../../store";
+import Wallet from "../../javascript/wallet.js";
 import hmy from "../../javascript/hmy";
-import contract from "../../../build/contracts/User.json";
+import UserBudgetContract from "../../../build/contracts/UserBudgetContract.json";
+import addCategory from "../addCategory.vue"
 const { Units, numToStr, fromWei } = require("@harmony-js/utils");
 const { BN } = require("@harmony-js/crypto");
+
 
 export default {
   name: "alltx",
   props: {
-    msg: String
+    msg: String,
   },
-
+  components:{
+    addCategory,
+  },
   methods: {
     getalltx: async function() {
       var myHeaders = new Headers();
@@ -69,7 +77,7 @@ export default {
 
       fetch("https://api.s0.t.hmny.io", requestOptions)
         .then(response => response.text())
-        .then(result => {
+        .then(async result => {
           result = JSON.parse(result);
           result = result.result.transactions;
           if (result) {
@@ -97,42 +105,39 @@ export default {
 
               this.eventTableData.push({
                 id: n + 1,
-                txid: data.id,
+                txid: data.hash,
                 time: time,
                 from: data.from,
                 to: data.to,
                 value: expected
               });
 
-              /*
-              this.getTxCategory(data.hash).then(result => {
-                const s = result
-                this.eventTableData.push({
-                  category: s
-                })
-              })
-*/
+
 
               n++;
             }
+
           }
         })
         .catch(error => console.log("error", error));
+            
+
     },
-    getTxCategory: async function(txid) {
-      const wallet = store.state.wallet;
-      let options = {
-        gasPrice: 1000000000,
-        gasLimit: 210000
-      };
-      const unattachedContract = await this.initializeContract();
+    getTxCategory: async function() {
+      const wallet = new Wallet();
+     // let options2 = { gasPrice: 1000000000, gasLimit: 21000 };
+      await wallet.signin();
+      const unattachedContract = await this.initializeContract(UserBudgetContract, store.state.userBudgetAddr);
       const contract = wallet.attachToContract(unattachedContract);
-      const value = await contract.methods.getTxCategory(txid).call(options);
-      return value;
+      const lol = await contract.methods.getContractAddr().call()
+      //.catch(e => {console.log(e);});
+
+      console.log("cat = " + lol)
+      return lol;
     },
-    initializeContract: async function() {
+    initializeContract: async function(contract, address) {
       const abi = contract.abi;
-      const contractAddress = store.state.userContract;
+      const contractAddress = address;
       const contractInstance = hmy.contracts.createContract(
         abi,
         contractAddress
@@ -159,6 +164,7 @@ export default {
   },
   data() {
     return {
+      dialogCat: null,
       eventTableData: [],
       headers: [
         {

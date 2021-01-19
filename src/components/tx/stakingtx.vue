@@ -1,7 +1,7 @@
 <template>
   <div class="stakingtx">
     <v-data-table
-      dense
+      
       :headers="headers"
       :items="eventTableData"
       item-key="name"
@@ -16,8 +16,81 @@
           <td class="">{{ item.to }}</td>
           <td class="">{{ item.value }}</td>
 
-          <td class="">
-            {{ item.category }}
+          <td class="" v-if="item.category != null">
+            {{ item.category }} 
+          </td>
+          <td class="" v-if="item.category == null">
+            <template>
+              <v-row justify="center">
+                <v-dialog
+                  v-model="dialogCat"
+                  
+                  max-width="600px"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-chip
+                      color="primary"
+                      dark
+                      v-bind="attrs"
+                      v-on="on"
+                      small
+                    >
+                      +
+                    </v-chip>
+                  </template>
+                  <v-card>
+                    <v-card-title>
+                      <span class="headline">New Category</span>
+                    </v-card-title>
+                    <v-card-text>
+                      <v-container>
+                        <v-row>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                          >
+                            <v-text-field
+                              :items="item.id"
+                              label="Tx*"
+                              required
+
+                            ></v-text-field>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            sm="6"
+                          >
+                            <v-autocomplete
+                              :items="['Sent to friend', 'Car Payements', 'Rent', 'Food', 'Housing', 'Fees', 'Alimony(poor dads)', 'Saving', 'Insurance']"
+                              label="Category"
+                              multiple
+                            ></v-autocomplete>
+                          </v-col>
+                        </v-row>
+                      </v-container>
+                      <small>All Fields Required *</small>
+                    </v-card-text>
+                    <v-card-actions>
+                      <v-spacer></v-spacer>
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        @click="dialogCat=false"
+                      >
+                        Close
+                      </v-btn>
+                      <v-btn
+                        color="blue darken-1"
+                        text
+                        v-on:click="dialogCat.value=false"
+                                         >
+                        Save
+                      </v-btn>
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </v-row>
+            </template>
           </td>
         </tr>
       </template>
@@ -161,6 +234,8 @@ export default {
   data() {
     return {
       eventTableData: [],
+      Categorydialog: false,
+      CategoryDialogData: null ,
       headers: [
         {
           text: "id",

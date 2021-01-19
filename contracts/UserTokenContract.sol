@@ -19,7 +19,7 @@ contract UserTokenContract {
         
         return address(this);
     }
-           function initialize(address _owner) public  {
+           function initialize(address _owner) public{
             owner = _owner;
   }
      function getAllTokens() public view returns(address[] memory,string[] memory,string[] memory,string[] memory,string[] memory, uint ){

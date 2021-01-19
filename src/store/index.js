@@ -19,7 +19,7 @@ export default new Vuex.Store({
     s2: null,
     s3: null,
     totatonebal: null,
-    OPENFI: "0xD605092887eB35fD4d5e1b703f50dd65CE13b2ed",
+    OPENFI: "0x2645B6ab1047d5fAe66c02B18E2A693515546fCF",
     userManagerAddr: null,
     userWalletAddr: null,
     userBudgetAddr: null,
@@ -84,7 +84,7 @@ export default new Vuex.Store({
       state.userWalletAddr = address;
     },
     setUserManagerAddr(state, address) {
-      state.userManagertAddr = address;
+      state.userManagerAddr = address;
     },
     setUserBudgetAddr(state, address) {
       state.userBudgetAddr = address;

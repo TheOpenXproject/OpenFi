@@ -1,6 +1,6 @@
 pragma solidity ^0.5.0;
 import "@openzeppelin/upgrades/contracts/upgradeability/ProxyFactory.sol";
-import "@openzeppelin/upgrades/contracts/ownership/Ownable.sol";
+
 
 
 contract UserFactory is ProxyFactory {
@@ -18,8 +18,8 @@ contract UserFactory is ProxyFactory {
     function createUser(bytes memory _data) public {
         if(usercontract[address(msg.sender)] == address(0x0000000000000000000000000000000000000000))
         {
-            address proxy = deployMinimal(implementationContract, _data);
-            usercontract[msg.sender] = proxy;
+            address _proxy = deployMinimal(implementationContract, _data);
+            usercontract[msg.sender] = _proxy;
             usercount++;
             
         }

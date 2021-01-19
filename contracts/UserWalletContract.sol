@@ -18,7 +18,7 @@ contract UserWalletContract{
         
         return address(this);
     }
-         function initialize(address _owner) public  {
+         function initialize(address _owner) public{
               owner = owner;
     }
     function getAllWallets() public returns(string[] memory, address[] memory , string[] memory, bool[] memory, uint)

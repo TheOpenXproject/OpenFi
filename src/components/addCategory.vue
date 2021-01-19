@@ -1,15 +1,81 @@
 <template>
   <div class="addCategory">
-    <input v-model="txid" placeholder="Tx ID" />
-    <input v-model="category" placeholder="Category" />
 
-    <b-button variant="success" v-on:click="addCategory" id="lol"
-      >Add Category to Tx</b-button
-    >
+      <v-row justify="center">
+        <v-dialog
+          
+          max-width="600px"
+        >
+          <template v-slot:activator="{ on, attrs }">
+            <v-chip
+              color="green lighten-2"
+              dark
+              v-bind="attrs"
+              v-on="on"
+              class="mt-4 "
+              center
+            >
+              +
+            </v-chip>
+          </template>
+          <v-card>
+            <v-card-title>
+              <span class="headline">New Category</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    overflow
+                  >Hash: <br>
+                    {{item.txid}}
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                  >
+                    <v-autocomplete
+                      :items="['Sent to friend', 'Car Payements', 'Rent', 'Food', 'Housing', 'Fees', 'Alimony(poor dads)', 'Saving', 'Insurance']"
+                      label="Category"
+                      v-model="category"
+                    ></v-autocomplete>
+                  </v-col>
+                </v-row>
+                                <v-row>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                    overflow
+                  >To : <br>
+                    {{item.to}}
+                  </v-col>
+                  <v-col
+                    cols="12"
+                    sm="6"
+                  >Amount : <br>
+                    {{item.value}}
+                  </v-col>
+                </v-row>
+              </v-container>
+              <small>All Fields Required *</small>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
 
-    <b-button variant="success" v-on:click="getTxCategory" id="lold"
-      >get</b-button
-    >
+              <v-btn
+                color="blue darken-1"
+                text
+                v-on:click="addCategory()">
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
+
+
   </div>
 </template>
 
@@ -18,58 +84,48 @@
 
 import store from "../store";
 import hmy from "../javascript/hmy";
-import contract from "../../build/contracts/UserManager.json";
+import OneWallet from "../javascript/wallet.js";
+
+import contract from "../../build/contracts/UserBudgetContract.json";
 //var fs = require("fs");
 export default {
-  name: "login",
+  name: "addCategory",
   props: {
-    msg: String
+    msg: String,
+    item: null,
   },
   methods: {
     addCategory: async function() {
-      const wallet = store.state.wallet;
-      let str = [this.txid, this.category];
-      console.log(str);
-      let options = {
-        gasPrice: 1000000000,
-        gasLimit: 2100000
-      };
-      const unattachedContract = await this.initializeContract();
-      const contract = wallet.attachToContract(unattachedContract);
-      const value = await contract.methods.setTxCategory(str).send(options);
-      console.log("hello :", value);
-    },
-    initializeContract: async function() {
-      const abi = contract.abi;
-      const contractAddress = store.state.userContract;
-      const contractInstance = hmy.contracts.createContract(
-        abi,
-        contractAddress
-      );
-      return contractInstance;
-    },
-    getTxCategory: async function() {
-      const wallet = store.state.wallet;
+      const wallet = new OneWallet();
+      await wallet.signin();
 
+      let str = [this.item.txid, this.category];
+      console.log(str);
       let options = {
         gasPrice: 1000000000,
         gasLimit: 210000
       };
       const unattachedContract = await this.initializeContract();
       const contract = wallet.attachToContract(unattachedContract);
-      const value = await contract.methods
-        .getTxCategory(
-          "0xe42368e1886b851b0a2a83a658602588a7cf17b05bb7d684e5ae85b110143297"
-        )
-        .call(options);
-      console.log("hello :", value);
-      return value;
+      await contract.methods.setTxCategory(str).send(options);
+      var cat = contract.methods.getTxCategory("0xa0274a3445b18b6906864a529a0427c3cc0da61e4358e754a3d55832021bf602").call();
+      console.log(cat)
+    },
+    initializeContract: async function() {
+      const abi = contract.abi;
+      const contractAddress = store.state.userBudgetAddr;
+      const contractInstance = hmy.contracts.createContract(
+        abi,
+        contractAddress
+      );
+      return contractInstance;
     }
   },
   data() {
     return {
-      txid: "",
-      category: ""
+
+      category: "",
+      dialogCat: null,
     };
   }
 };
