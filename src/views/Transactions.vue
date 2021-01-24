@@ -1,93 +1,57 @@
 <template>
   <div class="Transactions">
-    <div>
-      <v-card>
-        <v-tabs background-color="white accent-4" center-active fixed-tabs>
-          <v-tab>All</v-tab>
-          <v-tab>Staking</v-tab>
-          <v-tab>Contracts</v-tab>
-          <v-tab>Payments</v-tab>
+    <v-container class="grey lighten-4">
+      <v-tabs background-color="white accent-4" center-active fixed-tabs>
+        <v-tab>All</v-tab>
+        <v-tab>Staking</v-tab>
+        <v-tab>Contracts</v-tab>
+        <v-tab>Payments</v-tab>
 
-          <v-btn class="mx-0" dark color="success">
-            <v-icon dark>
-              mdi-plus
-            </v-icon>
-          </v-btn>
+        <v-btn class="mx-0 mt-2 mr-2" dark color="green lighten-1">
+          <v-icon dark>
+            mdi-plus
+          </v-icon>
+        </v-btn>
 
-          <v-tab-item>
-            <v-card flat>
-              <v-card-text>
-                <p></p>
+        <v-tab-item>
+          <p></p>
 
-                <p>
-                  <alltx />
-                </p>
-              </v-card-text>
-            </v-card>
-          </v-tab-item>
-          <v-tab-item>
-            <v-card flat>
-              <v-card-text>
-                <p></p>
+          <p>
+            <alltx />
+          </p>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text>
+              <p></p>
 
-                <p>
-                  <stakingtx />
-                </p>
-              </v-card-text>
-            </v-card>
-          </v-tab-item>
-          <v-tab-item>
-            <v-card flat>
-              <v-card-text>
-                <p>
-                  Sed aliquam ultrices mauris. Donec posuere vulputate arcu.
-                  Morbi ac felis. Etiam feugiat lorem non metus. Sed a libero.
-                </p>
-
-                <p>
-                  Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel,
-                  lacus. Aenean tellus metus, bibendum sed, posuere ac, mattis
-                  non, nunc. Aliquam lobortis. Aliquam lobortis. Suspendisse non
-                  nisl sit amet velit hendrerit rutrum.
-                </p>
-
-                <p class="mb-0">
-                  Phasellus dolor. Fusce neque. Fusce fermentum odio nec arcu.
-                  Pellentesque libero tortor, tincidunt et, tincidunt eget,
-                  semper nec, quam. Phasellus blandit leo ut odio.
-                </p>
-              </v-card-text>
-            </v-card>
-          </v-tab-item>
-          <v-tab-item>
-            <v-card flat>
-              <v-card-text>
-                <p>
-                  Sed aliquam ultrices mauris. Donec posuere vulputate arcu.
-                  Morbi ac felis. Etiam feugiat lorem non metus. Sed a libero.
-                </p>
-
-                <p>
-                  Nam ipsum risus, rutrum vitae, vestibulum eu, molestie vel,
-                  lacus. Aenean tellus metus, bibendum sed, posuere ac, mattis
-                  non, nunc. Aliquam lobortis. Aliquam lobortis. Suspendisse non
-                  nisl sit amet velit hendrerit rutrum.
-                </p>
-
-                <p class="mb-0">
-                  Phasellus dolor. Fusce neque. Fusce fermentum odio nec arcu.
-                  Pellentesque libero tortor, tincidunt et, tincidunt eget,
-                  semper nec, quam. Phasellus blandit leo ut odio.
-                </p>
-              </v-card-text>
-            </v-card>
-          </v-tab-item>
-        </v-tabs>
-      </v-card>
-
-      <b-button variant="primary" href="#">More Info</b-button>
+              <p>
+                <stakingtx />
+              </p>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text>
+              <br /><br /><br /><br />
+              <p>
+                <center>coming soon...</center>
+              </p>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text>
+              <br /><br /><br /><br />
+              <center>coming soon...</center>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+      </v-tabs>
       <addCategory />
-    </div>
+    </v-container>
   </div>
 </template>
 

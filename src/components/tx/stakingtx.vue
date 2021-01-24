@@ -1,7 +1,6 @@
 <template>
   <div class="stakingtx">
     <v-data-table
-      
       :headers="headers"
       :items="eventTableData"
       item-key="name"
@@ -15,83 +14,6 @@
           <td class="">{{ item.from }}</td>
           <td class="">{{ item.to }}</td>
           <td class="">{{ item.value }}</td>
-
-          <td class="" v-if="item.category != null">
-            {{ item.category }} 
-          </td>
-          <td class="" v-if="item.category == null">
-            <template>
-              <v-row justify="center">
-                <v-dialog
-                  v-model="dialogCat"
-                  
-                  max-width="600px"
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-chip
-                      color="primary"
-                      dark
-                      v-bind="attrs"
-                      v-on="on"
-                      small
-                    >
-                      +
-                    </v-chip>
-                  </template>
-                  <v-card>
-                    <v-card-title>
-                      <span class="headline">New Category</span>
-                    </v-card-title>
-                    <v-card-text>
-                      <v-container>
-                        <v-row>
-                          <v-col
-                            cols="12"
-                            sm="6"
-                          >
-                            <v-text-field
-                              :items="item.id"
-                              label="Tx*"
-                              required
-
-                            ></v-text-field>
-                          </v-col>
-                          <v-col
-                            cols="12"
-                            sm="6"
-                          >
-                            <v-autocomplete
-                              :items="['Sent to friend', 'Car Payements', 'Rent', 'Food', 'Housing', 'Fees', 'Alimony(poor dads)', 'Saving', 'Insurance']"
-                              label="Category"
-                              multiple
-                            ></v-autocomplete>
-                          </v-col>
-                        </v-row>
-                      </v-container>
-                      <small>All Fields Required *</small>
-                    </v-card-text>
-                    <v-card-actions>
-                      <v-spacer></v-spacer>
-                      <v-btn
-                        color="blue darken-1"
-                        text
-                        @click="dialogCat=false"
-                      >
-                        Close
-                      </v-btn>
-                      <v-btn
-                        color="blue darken-1"
-                        text
-                        v-on:click="dialogCat.value=false"
-                                         >
-                        Save
-                      </v-btn>
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
-              </v-row>
-            </template>
-          </td>
         </tr>
       </template>
     </v-data-table>
@@ -171,7 +93,7 @@ export default {
               console.log(expected);
 
               this.eventTableData.push({
-                id: data.hash,
+                id: n + 1,
                 time: time,
                 from: data.msg.delegatorAddress,
                 to: data.msg.validatorAddress,
@@ -235,25 +157,29 @@ export default {
     return {
       eventTableData: [],
       Categorydialog: false,
-      CategoryDialogData: null ,
+      CategoryDialogData: null,
       headers: [
         {
-          text: "id",
+          text: "#",
           align: "start",
           sortable: false,
           value: "id",
-          class: "blue rounded-tl-lg border-0"
+          class: "green lighten-1 rounded-tl-lg border-0"
         },
 
-        { text: "date", value: "time", class: "blue border-0" },
-        { text: "From", value: "from", class: "blue border-0" },
-        { text: "To ", value: "to", class: "blue border-0" },
-        { text: "Amount", value: "value", class: "blue border-0" },
+        { text: "date", value: "time", class: "green lighten-1  border-0" },
+        { text: "From", value: "from", class: "green lighten-1  border-0" },
+        { text: "To ", value: "to", class: "green lighten-1  border-0" },
         {
+          text: "Amount",
+          value: "value",
+          class: "green lighten-1 rounded-tr-lg  border-0"
+        }
+        /*{
           text: "category ",
           value: "category",
-          class: "blue rounded-tr-lg border-0"
-        }
+          class: "green lighten-1  rounded-tr-lg border-0"
+        }*/
       ]
     };
   },
@@ -266,7 +192,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .truncate {
-  max-width: 200px;
+  max-width: 120px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

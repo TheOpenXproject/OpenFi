@@ -13,21 +13,7 @@
         <v-col cols="12" sm="6" md="8">
           <v-card class="pa-2 rounded-r-xl" height="100%">
             <v-container>
-              <v-row>
-                <h4>Assets / Tokens</h4>
-                <v-spacer></v-spacer>
-                <v-btn class="mx-2" fab dark color="blue">
-                  <v-icon dark>
-                    mdi-plus
-                  </v-icon>
-                </v-btn>
-              </v-row>
-              <v-row>
-                <v-col cols="2" sm="6" md="4">
-                  <v-btn fab dark large class="green lighten-2"> los </v-btn>|
-                  3.95$
-                </v-col>
-              </v-row>
+              <mytokens />
             </v-container>
           </v-card>
         </v-col>
@@ -69,6 +55,7 @@ import "bootstrap-vue/dist/bootstrap-vue.css";
 import alltx from "../components/tx/alltx.vue";
 import shardwidget from "../components/shardwidget.vue";
 import coinbalwidget from "../components/coinbalwidget.vue";
+import mytokens from "../components/mytokens.vue";
 
 //import store from "../store"
 
@@ -77,7 +64,8 @@ export default {
   components: {
     shardwidget,
     coinbalwidget,
-    alltx
+    alltx,
+    mytokens
   },
 
   data() {
@@ -85,9 +73,4 @@ export default {
   }
 };
 </script>
-<style>
-.pa-2 {
-  border: 5px;
-  border-color: #66bb6a;
-}
-</style>
+<style></style>

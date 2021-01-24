@@ -1,27 +1,30 @@
 <template>
   <div class="alltx rounded-lg">
     <v-data-table
-      dense
       :headers="headers"
       :items="eventTableData"
       item-key="name"
       class="table rounded-xl table-striped"
       reactive
-      flat
+      height="100%"
+      v-if="this.isLoaded == true"
+      no-scroll
     >
       <template v-slot:item="{ item }">
-        <tr>
-          <td class="truncate">{{ item.id }}</td>
-          <td class="">{{ item.time }}</td>
+        <tr class="text-center">
+          <td class="">{{ item.id }}</td>
+          <td overflow-hidden flex class="">{{ item.time }}</td>
           <td class="">{{ item.from }}</td>
           <td class="">{{ item.to }}</td>
-          <td class="">{{ item.value }}</td>
+          <td class="truncate">{{ item.value }}</td>
 
           <td class="" v-if="item.category != null">
-            {{ item.category }} 
+            <v-chip color="green lighten-2" dark class="mt-2">
+              {{ item.category }}
+            </v-chip>
           </td>
-          <td class="" v-if="item.category == null">
-            <addCategory :item="item"/>
+          <td v-if="item.category == null">
+            <center><addCategory :item="item" class="mt-1" /></center>
           </td>
         </tr>
       </template>
@@ -31,21 +34,20 @@
 
 <script>
 import store from "../../store";
-import Wallet from "../../javascript/wallet.js";
+
 import hmy from "../../javascript/hmy";
 import UserBudgetContract from "../../../build/contracts/UserBudgetContract.json";
-import addCategory from "../addCategory.vue"
+import addCategory from "../addCategory.vue";
 const { Units, numToStr, fromWei } = require("@harmony-js/utils");
 const { BN } = require("@harmony-js/crypto");
-
 
 export default {
   name: "alltx",
   props: {
-    msg: String,
+    msg: String
   },
-  components:{
-    addCategory,
+  components: {
+    addCategory
   },
   methods: {
     getalltx: async function() {
@@ -67,6 +69,7 @@ export default {
           }
         ]
       });
+      // let options2 = { gasPrice: 1000000000, gasLimit: 21000 };
 
       var requestOptions = {
         method: "POST",
@@ -102,38 +105,36 @@ export default {
               const Wei = new BN(str);
               const expected = fromWei(Wei, Units.one);
               //console.log(expected);
-
+              var cat = await this.getTxCategory(data.hash);
               this.eventTableData.push({
                 id: n + 1,
                 txid: data.hash,
                 time: time,
                 from: data.from,
                 to: data.to,
-                value: expected
+                value: expected,
+                category: cat
               });
-
-
 
               n++;
             }
-
           }
         })
         .catch(error => console.log("error", error));
-            
-
     },
-    getTxCategory: async function() {
-      const wallet = new Wallet();
-     // let options2 = { gasPrice: 1000000000, gasLimit: 21000 };
-      await wallet.signin();
-      const unattachedContract = await this.initializeContract(UserBudgetContract, store.state.userBudgetAddr);
-      const contract = wallet.attachToContract(unattachedContract);
-      const lol = await contract.methods.getContractAddr().call()
-      //.catch(e => {console.log(e);});
+    getTxCategory: async function(txid) {
+      const wallet = store.state.wallet;
 
-      console.log("cat = " + lol)
-      return lol;
+      const unattachedContract = await this.initializeContract(
+        UserBudgetContract,
+        store.state.userBudgetAddr
+      );
+      const contract = wallet.attachToContract(unattachedContract);
+
+      const category = await contract.methods.getTxCategory(txid).call();
+      if (category != "") {
+        return category;
+      }
     },
     initializeContract: async function(contract, address) {
       const abi = contract.abi;
@@ -143,28 +144,14 @@ export default {
         contractAddress
       );
       return contractInstance;
-    },
-    addCategory: async function(txid, category) {
-      const wallet = store.state.wallet;
-      var str;
-      str[0] = txid;
-      console.log(str[0]);
-      str[1] = category;
-      let options = {
-        gasPrice: 1000000000,
-        gasLimit: 210000
-      };
-      const unattachedContract = await this.initializeContract();
-      const contract = wallet.attachToContract(unattachedContract);
-      const value = await contract.methods
-        .setTxCategory("qd", "dd")
-        .send(options);
-      console.log("hello :", value);
     }
   },
   data() {
     return {
       dialogCat: null,
+      isLoaded: false,
+      txids: null,
+      categories: null,
       eventTableData: [],
       headers: [
         {
@@ -172,23 +159,28 @@ export default {
           align: "start",
           sortable: true,
           value: "id",
-          class: "blue rounded-tl-lg border-0"
+          class: "green lighten-1 rounded-tl-lg border-0"
         },
 
-        { text: "date", value: "time", class: "blue border-0" },
-        { text: "From", value: "from", class: "blue border-0" },
-        { text: "To ", value: "to", class: "blue border-0" },
-        { text: "Amount", value: "value", class: "blue border-0" },
+        { text: "date", value: "time", class: "green lighten-1 border-0" },
+        { text: "From", value: "from", class: "green lighten-1 border-0" },
+        { text: "To ", value: "to", class: "green lighten-1 border-0" },
+        { text: "Amount", value: "value", class: "green lighten-1 border-0" },
         {
           text: "category ",
           value: "category",
-          class: "blue rounded-tr-lg border-0"
+          class: "green lighten-1 rounded-tr-lg border-0"
         }
       ]
     };
   },
   mounted: async function() {
-    this.getalltx();
+    try {
+      this.isLoaded = true;
+      await this.getalltx();
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 </script>
@@ -196,7 +188,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .truncate {
-  max-width: 200px;
+  max-width: 120px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

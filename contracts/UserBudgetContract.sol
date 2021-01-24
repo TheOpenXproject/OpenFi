@@ -8,7 +8,7 @@ contract UserBudgetContract {
     string[1][] txcat;
     string[] txids;
     string[] categories;
-
+    uint ArraySize = 0;
 
 
     uint arrayLength=0;
@@ -17,14 +17,16 @@ contract UserBudgetContract {
     }
     mapping(string => string) public mappedtxCategories;
 
-    function setTxCategory(string[2] memory _txid_cat) public {
-        mappedtxCategories[_txid_cat[0]] = _txid_cat[1];
+    function setTxCategory(string memory _txid, string memory _cat) public {
+        mappedtxCategories[_txid] = _cat;
+        txids.push(_txid);
+        categories.push(_cat);
     }
     function getContractAddr() public view returns (address){
         address thisaddr = address(this);
         return thisaddr;
     }
-    function getAllCategories() public view returns(string[] memory){
+    function getAllCategories() public view returns (string[] memory){
         string[] memory _allcat = categories;
         return _allcat;
     }

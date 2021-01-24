@@ -1,25 +1,25 @@
 pragma solidity ^0.5.0;
-import "@openzeppelin/upgrades/contracts/upgradeability/ProxyFactory.sol";
+//import "@openzeppelin/upgrades/contracts/upgradeability/ProxyFactory.sol";
+//import "https://github.com/OpenZeppelin/openzeppelin-sdk/blob/master/packages/lib/contracts/upgradeability/ProxyFactory.sol";
+import "./UserManager.sol";
 
-
-
-contract UserFactory is ProxyFactory {
+contract UserFactory{
     
     
-    address public implementationContract;
     mapping(address => address) public usercontract;
     address owner;
     uint usercount = 0;
-    constructor (address _implementationContract) public {
-        implementationContract = _implementationContract;
+    
+    constructor () public {
         owner = msg.sender;
     }
     
-    function createUser(bytes memory _data) public {
+
+    function createUser() public {
         if(usercontract[address(msg.sender)] == address(0x0000000000000000000000000000000000000000))
         {
-            address _proxy = deployMinimal(implementationContract, _data);
-            usercontract[msg.sender] = _proxy;
+            UserManager newManagerContract = new UserManager();
+            usercontract[address(msg.sender)] = newManagerContract.getContractAddr();
             usercount++;
             
         }

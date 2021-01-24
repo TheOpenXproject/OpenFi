@@ -15,19 +15,17 @@ contract UserWalletContract{
     mapping(address => uint) public arrayIndex;
 
        function getContractAddr() public view returns (address){
-        
-        return address(this);
+        address thisaddr = address(this);
+        return thisaddr;
     }
-         function initialize(address _owner) public{
-              owner = owner;
-    }
-    function getAllWallets() public returns(string[] memory, address[] memory , string[] memory, bool[] memory, uint)
+
+    function getAllWallets() public view returns(string[] memory, address[] memory , string[] memory, bool[] memory, uint)
     {
         
         return(walletName, walletAddr, walletDescription, isMyWallet, walletCount);
     }
     
-    function _getWalletIndex(address _addr) internal returns(uint){
+    function _getWalletIndex(address _addr) internal view returns(uint){
         return arrayIndex[_addr];
     }
     

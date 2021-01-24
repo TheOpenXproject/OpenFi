@@ -32,7 +32,7 @@ export default {
         maintainAspectRatio: false
       },
       chartColors: [
-        "#EF5350",
+        "#89cff0",
         "#EC407A",
         "#AB47BC",
         "#7E57C2",
@@ -42,35 +42,7 @@ export default {
         "#AB47BC",
         "#7E57C2",
         " #7E57C2"
-      ],
-      tokenList: {
-        tokenName: [
-          "ARANK",
-          "BUSD ",
-          "EUSK ",
-          "GOLD ",
-          "LINK",
-          "LMA  ",
-          "ONES",
-          "SEE ",
-          "SEED",
-          "USDs",
-          "WETH"
-        ],
-        tokenAddr: [
-          "0xBD16b0B2eB520b7Ff4A4156d367Ee359Ac19c531",
-          "0xE176EBE47d621b984a73036B9DA5d834411ef734",
-          "0x85a1DD919cd605aa2EAD4b01ff1190504BcAb609",
-          "0x7aFB0E2ebA6Dc938945FE0f42484d3b8F442D0AC",
-          "0x218532a12a389a4a92fC0C5Fb22901D1c19198aA",
-          "0x7d0546dBb1Dca8108d99Aa389A8e9Ce0C40B2370",
-          "0xB2f2C1D77113042f5ee9202d48F6d15FB99efb63",
-          "0x7fA202fdb3B0eCB975119cc3A895BFB3104aDA68",
-          "0x793DAC3Ec4969A5BEE684BcF4290d52feB8F51b4",
-          "0x67e025BE82304F7D872cc8858285860223C217fB",
-          "0xF720b7910C6b2FF5bd167171aDa211E226740bfe"
-        ]
-      }
+      ]
     };
   },
   methods: {
@@ -127,26 +99,34 @@ export default {
     try {
       const dataarray = new Array();
       const tokenname = new Array();
-      hmy.blockchain
+      await hmy.blockchain
         .getBalance({ address: store.state.address })
         .then(response => {
           dataarray.push(fromWei(hexToNumber(response.result), Units.one)); //
           tokenname.push("One");
           this.chartdata.labels.push("ONE");
+          store.commit(
+            "setVTokenBalances",
+            fromWei(hexToNumber(response.result), Units.one)
+          );
         });
 
       var i = 1;
 
-      while (i < this.tokenList.tokenAddr.length) {
-        await this.getTokenBalance(this.tokenList.tokenAddr[i]).then(
-          tokenBalance => {
-            if (tokenBalance > 0.000000000001) {
-              this.chartdata.labels.push(this.tokenList.tokenName[i]);
+      while (i < store.state.validatedtokens.addr.length) {
+        await this.getTokenBalance(store.state.validatedtokens.addr[i])
+          .then(tokenBalance => {
+            console.log(i);
+            if (tokenBalance > 0.0000000001) {
+              this.chartdata.labels.push(store.state.validatedtokens.symbol[i]);
               dataarray.push(tokenBalance);
-              tokenname.push(this.tokenList.tokenName[i]);
+              console.log(tokenBalance);
+              tokenname.push(store.state.validatedtokens.symbol[i]);
             }
-          }
-        );
+            store.commit("setVTokenBalances", tokenBalance);
+          })
+          .catch(error => console.log(error));
+
         i++;
       }
       this.chartdata.datasets.push({

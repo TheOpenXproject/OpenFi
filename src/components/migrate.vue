@@ -12,7 +12,7 @@
 
         	
            <v-btn dark  class="orange darken-2
-           center pl-15 pr-15" width="100%" v-bind="attrs"
+           center " v-bind="attrs"
            v-on="on" center>
 
            <table>

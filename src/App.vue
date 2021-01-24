@@ -5,10 +5,12 @@
       encouter here.
     </div>
     <div v-if="loggedIn">
-      <v-app-bar app fixed class="green lighten-2">
+      <v-app-bar app fixed class="green lighten-1">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-toolbar-title>Open.fi</v-toolbar-title>
+        <v-toolbar-title
+          ><img width="120px" src="./assets/openfitrans.png" />
+        </v-toolbar-title>
 
         <v-spacer></v-spacer>
 
@@ -22,8 +24,7 @@
         class="navigation"
         bg-dark
       >
-        <div class="list-group list-group-flush ">
-          <div class="green lighten-2 pt-8"><center>OpenFi</center></div>
+        <div class="list-group">
           <a
             ><router-link to="/" class="list-group-item list-group-item-action "
               >Dashboard</router-link
@@ -105,41 +106,31 @@
     </div>
 
     <v-container class="logincard" v-if="!loggedIn">
-      <v-container pa-0>
+      <v-container>
         <v-row align="center" justify="center" style="height:95vh">
           <v-col
-            cols="8"
-            lg="8"
-            md="8"
+            cols="12"
+            lg="4"
+            md="4"
             class="white lighten-2 fill-height d-flex flex-column justify-center align-center"
           >
-            <v-card class="elevation-20 rounded-xl" height="500" :width="width">
+            <v-card class="elevation-6 rounded-xl" height="500">
               <v-card-text>
-                <h2 align="center" class="align-center" text-color="green">
-                  OpenFi
-                </h2>
-
-                <center class="pt-10"><b>Sign in :</b></center>
-                <br />
-                <v-row>
-                  <LedgerWalletLogin class="center" />
-
-                  <OneWalletLogin class="center" />
-                </v-row>
+                <center>
+                  <img width="200px" src="./assets/openfitrans.png" />
+                </center>
+                <v-divider
+                  class=" d-flex fill-height justify-center align-center"
+                ></v-divider>
+                <br /><br />
+                <center><Login /></center>
                 <br /><br />
                 <v-divider
                   class=" d-flex fill-height justify-center align-center"
                 ></v-divider>
-
                 <migrate />
-
-                <v-divider
-                  class=" d-flex fill-height justify-center align-center"
-                ></v-divider>
+                <br />
                 <createAccount />
-                <v-divider
-                  class=" d-flex fill-height justify-center align-center"
-                ></v-divider>
               </v-card-text>
             </v-card>
           </v-col>
@@ -150,8 +141,7 @@
 </template>
 
 <script>
-import OneWalletLogin from "./components/OneWalletLogin.vue";
-import LedgerWalletLogin from "./components/LedgerWalletLogin.vue";
+import Login from "./components/login.vue";
 import createAccount from "./components/createAccount.vue";
 import migrate from "./components/migrate.vue";
 import store from "./store";
@@ -160,8 +150,7 @@ export default {
   name: "App",
 
   components: {
-    OneWalletLogin,
-    LedgerWalletLogin,
+    Login,
     createAccount,
     migrate
   },
@@ -183,42 +172,8 @@ export default {
     loggedIn: function() {
       // `this` points to the vm instance
       return store.state.signedIn;
-    },
-    width() {
-      switch (this.$vuetify.breakpoint.name) {
-        case "xs":
-          return;
-        case "sm":
-          return "100px";
-        case "md":
-          return "300px";
-        case "lg":
-          return 275;
-        case "xl":
-          return 300;
-      }
-      return 0;
     }
   }
 };
 </script>
-<style type="text/css">
-.center {
-  margin: auto;
-  width: 50%;
-  padding: 10px;
-  text-align: center;
-}
-.createAccount {
-  position: center;
-  text-align: center;
-}
-.logo {
-  vertical-align: middle;
-  text-align: center;
-  font-weight: 300;
-
-  font-size: 50px;
-  position: absolute;
-}
-</style>
+<style type="text/css"></style>

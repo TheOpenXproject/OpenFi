@@ -1,6 +1,14 @@
 <template>
   <div class="OneWalletLogin">
-    <v-btn class="mx-2" fab dark large color="white" v-on:click="initOneWallet">
+    <v-btn
+      class="mx-2"
+      fab
+      dark
+      text
+      large
+      color="white"
+      v-on:click="initOneWallet"
+    >
       <v-img src="../assets/one.png" alt="" contain height="50px" width="50px">
       </v-img>
     </v-btn>
@@ -10,7 +18,7 @@
 <script>
 //import hmy from "../javascript/hmy";
 
-import OneWallet from "../javascript/wallet.js";
+import OneWallet from "../javascript/OneWallet.js";
 import store from "../store";
 import hmy from "../javascript/hmy";
 import contractUserFactory from "../../build/contracts/UserFactory.json";
