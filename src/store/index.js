@@ -25,6 +25,7 @@ export default new Vuex.Store({
     userBudgetAddr: null,
     userTokenAddr: null,
     isDataLoaded: false,
+    metamaskaddress: null,
     validatedtokens: {
       name: [
         "One",
@@ -102,6 +103,10 @@ export default new Vuex.Store({
     //
     //USERDATA
     //
+
+    setMetamaskAddress(state, address){
+      state.metamaskaddress = address;
+    },
 
     setUserAddress(state, address) {
       state.address = address;
