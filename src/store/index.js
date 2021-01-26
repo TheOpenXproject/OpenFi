@@ -104,7 +104,7 @@ export default new Vuex.Store({
     //USERDATA
     //
 
-    setMetamaskAddress(state, address){
+    setMetamaskAddress(state, address) {
       state.metamaskaddress = address;
     },
 
