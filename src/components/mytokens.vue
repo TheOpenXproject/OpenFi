@@ -80,7 +80,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .pa-2 {
   border: 5px;
   border-color: #66bb6a;

@@ -2,19 +2,19 @@
   <div class="Validators">
     <v-container>
       <h3>Validators</h3>
-        
-          <p>Coming soon..</p>
-         
-        
-     
+
+      <center><allvalidators /></center>
     </v-container>
   </div>
 </template>
 
 <script>
+import allvalidators from "../components/validators/allvalidators.vue";
 export default {
   name: "Validators",
-  components: {}
+  components: {
+    allvalidators
+  }
 };
 </script>
 <style type="text/css"></style>

@@ -5,14 +5,9 @@
       encouter here.
     </div>
     <div v-if="loggedIn">
-      <v-app-bar app  class="green bar lighten-1">
-
+      <v-app-bar app class="green bar lighten-1">
         <v-toolbar-title
-          ><img
-            width="150px"
-            class=""
-            src="./assets/openfitrans.png"
-          />
+          ><img width="150px" class="" src="./assets/openfitrans.png" />
         </v-toolbar-title>
 
         <v-spacer></v-spacer>

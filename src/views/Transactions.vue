@@ -7,11 +7,7 @@
         <v-tab>Contracts</v-tab>
         <v-tab>Payments</v-tab>
 
-        <v-btn class="mx-0 mt-2 mr-2" dark color="green lighten-1">
-          <v-icon dark>
-            mdi-plus
-          </v-icon>
-        </v-btn>
+        <newtx />
 
         <v-tab-item>
           <p></p>
@@ -51,7 +47,7 @@
         </v-tab-item>
       </v-tabs>
       <addCategory />
-  </v-container>
+    </v-container>
   </div>
 </template>
 
@@ -59,11 +55,13 @@
 import alltx from "../components/tx/alltx.vue";
 import stakingtx from "../components/tx/stakingtx.vue";
 import addCategory from "../components/addCategory.vue";
+import newtx from "../components/tx/newtx.vue";
 export default {
   name: "Transactions",
   components: {
     alltx,
     stakingtx,
+    newtx,
     addCategory
   }
 };
