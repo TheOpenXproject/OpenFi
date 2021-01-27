@@ -1,6 +1,6 @@
 <template>
   <div class="Transactions">
-    <v-container class="grey lighten-4">
+    <v-container>
       <v-tabs background-color="white accent-4" center-active fixed-tabs>
         <v-tab>All</v-tab>
         <v-tab>Staking</v-tab>
@@ -51,7 +51,7 @@
         </v-tab-item>
       </v-tabs>
       <addCategory />
-    </v-container>
+  </v-container>
   </div>
 </template>
 

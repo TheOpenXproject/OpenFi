@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <v-container class="grey lighten-4">
+    <v-container class="">
       <h3 class="mt-5 ml-5">Dashboard</h3>
 
       <v-divider class="green lighten-1" />

@@ -571,7 +571,7 @@
                                   <v-btn
                                     color="primary"
                                     text
-                                    @click="dialog = false"
+                                    @click="dialogtx = false"
                                   >
                                     I accept
                                   </v-btn>
@@ -727,7 +727,9 @@ export default {
         if (operationId) {
           const operation = await bridgeSDK.api.getOperation(operationId);
           this.migrationStatus = "ongoing";
-          this.migrationMessage = operation.actions.filter();
+          this.migrationMessage = operation.actions.filter(
+            a => a.status === STATUS.IN_PROGRESS
+          );
           console.log(
             "Action: ",
             operation.actions.filter(a => a.status === STATUS.IN_PROGRESS)

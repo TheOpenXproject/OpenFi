@@ -5,11 +5,14 @@
       encouter here.
     </div>
     <div v-if="loggedIn">
-      <v-app-bar app fixed class="green lighten-1">
-        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar app  class="green bar lighten-1">
 
         <v-toolbar-title
-          ><img width="120px" src="./assets/openfitrans.png" />
+          ><img
+            width="150px"
+            class=""
+            src="./assets/openfitrans.png"
+          />
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
@@ -18,88 +21,120 @@
       </v-app-bar>
 
       <v-navigation-drawer
-        v-model="drawer"
-        fixed
-        temporary
-        class="navigation"
+        show
+        absolute
+        class="navigation grey navs lighten-4"
         bg-dark
-      >
-        <div class="list-group">
-          <a
-            ><router-link to="/" class="list-group-item list-group-item-action "
-              >Dashboard</router-link
-            ></a
+        ><br /><br /><br />
+        <v-container class="text-left pa-0 ">
+          <v-card
+            class="white lighten-1 grey--text bg-light"
+            width="100%"
+            height="50"
           >
-          <a
+            <router-link
+              to="/"
+              class="list-group-item list-group-item-action grey--text text--darken-1"
+              >Dashboard<img
+                src="./assets/right-arrow.png"
+                height="20"
+                class="float-right"/></router-link
+          ></v-card>
+          <v-card class="white lighten-1 " height="50"
+            ><router-link
+              to="/Wallets"
+              class="list-group-item list-group-item-action bg-light grey--text text--darken-2"
+              >Wallets<img
+                src="./assets/right-arrow.png"
+                height="20"
+                class="float-right"/></router-link
+          ></v-card>
+          <v-card class="white lighten-1 " height="50"
             ><router-link
               to="/Transactions"
-              class="list-group-item list-group-item-action "
-              >Transactions</router-link
-            ></a
-          >
-          <a
-            ><router-link
-              to="/Card"
-              class="list-group-item list-group-item-action "
-              >Card</router-link
-            ></a
-          >
-          <a
-            ><router-link
-              to="/Merchant"
-              class="list-group-item list-group-item-action"
-              >Merchant</router-link
-            ></a
-          >
+              class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
+              >Transactions<img
+                src="./assets/right-arrow.png"
+                height="20"
+                class="float-right"/></router-link
+          ></v-card>
 
-          <a
+          <v-card class="white lighten-1 " height="50"
+            ><img
+              src="./assets/right-arrow.png"
+              height="20"
+              class="float-right"/><router-link
+              to="/Exchanges"
+              class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
+              >Exchanges
+              <img
+                src="./assets/right-arrow.png"
+                height="20"
+                class="float-right"/></router-link
+          ></v-card>
+
+          <v-card class="white lighten-1 " height="50"
             ><router-link
-              to="/Swap"
-              class="list-group-item list-group-item-action "
-              >Swap</router-link
-            ></a
-          >
-          <a
+              to="/migrate"
+              class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
+              >Migrate<img
+                src="./assets/right-arrow.png"
+                height="20"
+                class="float-right"/></router-link
+          ></v-card>
+
+          <v-card class="white lighten-1 " height="50"
             ><router-link
-              to="/Pool"
-              class="list-group-item list-group-item-action bg-light"
-              >Pool</router-link
-            ></a
-          >
-          <a
+              to="/Cards"
+              class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
+              >Cards<img
+                src="./assets/right-arrow.png"
+                height="20"
+                class="float-right"/></router-link
+          ></v-card>
+
+          <v-card class="white lighten-1" height="50"
             ><router-link
-              to="/Stake"
-              class="list-group-item list-group-item-action bg-light"
-              >Stake</router-link
-            ></a
-          >
-          <a
+              to="/Pools"
+              class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
+              >Liquidity Pools<img
+                src="./assets/right-arrow.png"
+                height="20"
+                class="float-right"/></router-link
+          ></v-card>
+          <v-card class="white lighten-1 " height="50"
             ><router-link
-              to="/Preferences"
-              class="list-group-item list-group-item-action bg-light"
-              >Preferences</router-link
-            ></a
-          >
-          <a
+              to="/Delegations"
+              class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
+              >Delegations<img
+                src="./assets/right-arrow.png"
+                height="20"
+                class="float-right"/></router-link
+          ></v-card>
+          <v-card class="white lighten-1 " height="50"
             ><router-link
-              to="/Statistics"
-              class="list-group-item list-group-item-action bg-light"
-              >Statistics</router-link
-            ></a
-          >
-          <a
+              to="/validators"
+              class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
+              >Validators<img
+                src="./assets/right-arrow.png"
+                height="20"
+                class="float-right"/></router-link
+          ></v-card>
+          <v-card class="white lighten-1 " height="50"
             ><router-link
-              to="/About"
-              class="list-group-item list-group-item-action bg-light"
-              >About</router-link
-            ></a
-          >
-        </div>
+              to="/Contracts"
+              class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
+              >Contracts<img
+                src="./assets/right-arrow.png"
+                height="20"
+                class="float-right"/></router-link
+          ></v-card>
+        </v-container>
 
         <!--  -->
       </v-navigation-drawer>
 
-      <v-main>
+      <v-main relative>
         <!--  -->
         <router-view />
       </v-main>
@@ -159,12 +194,23 @@ export default {
     logout: async function() {
       await window.onewallet.forgetIdentity();
       store.commit("hasSignedIn", false);
+    },
+    isMobile() {
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     }
   },
 
   data() {
     return {
-      drawer: null
+      drawer: this.isMobile()
     };
   },
   computed: {
@@ -176,4 +222,5 @@ export default {
   }
 };
 </script>
+
 <style type="text/css"></style>

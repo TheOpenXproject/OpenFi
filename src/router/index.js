@@ -16,44 +16,44 @@ const routes = [
     component: () => import("../views/Transactions.vue")
   },
   {
-    path: "/Card",
-    name: "Card",
-    component: () => import("../views/Card.vue")
+    path: "/Cards",
+    name: "Cards",
+    component: () => import("../views/Cards.vue")
   },
   {
-    path: "/Merchant",
-    name: "Merchant",
-    component: () => import("../views/Merchant.vue")
+    path: "/Migrate",
+    name: "Migrate",
+    component: () => import("../views/Migrate.vue")
   },
   {
-    path: "/Swap",
-    name: "Swap",
-    component: () => import("../views/Swap.vue")
+    path: "/Wallets",
+    name: "Wallets",
+    component: () => import("../views/Wallets.vue")
   },
   {
-    path: "/Pool",
-    name: "Pool",
-    component: () => import("../views/Pool.vue")
+    path: "/Exchanges",
+    name: "Exchanges",
+    component: () => import("../views/Exchanges.vue")
   },
   {
-    path: "/Stake",
-    name: "Stake",
-    component: () => import("../views/Stake.vue")
+    path: "/Pools",
+    name: "Pools",
+    component: () => import("../views/Pools.vue")
   },
   {
-    path: "/Preferences",
-    name: "Preferences",
-    component: () => import("../views/Preferences.vue")
+    path: "/Delegations",
+    name: "Delegations",
+    component: () => import("../views/Delegations.vue")
   },
   {
-    path: "/Statistics",
-    name: "Statistics",
-    component: () => import("../views/Statistics.vue")
+    path: "/validators",
+    name: "validators",
+    component: () => import("../views/validators.vue")
   },
   {
-    path: "/About",
-    name: "About",
-    component: () => import("../views/About.vue")
+    path: "/Contracts",
+    name: "Contracts",
+    component: () => import("../views/Contracts.vue")
   }
 ];
 
