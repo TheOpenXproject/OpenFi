@@ -129,10 +129,11 @@ export default {
         .getUserContractAddress(zeroxAddr)
         .call();
       console.log(UserManagerAddr);
-      if (UserManagerAddr == "0x0000000000000000000000000000000000000000") {
+     /* if (UserManagerAddr == "0x0000000000000000000000000000000000000000") {
+        await window.onewallet.forgetIdentity();
         this.loginError = true;
         return 1;
-      }
+      }*/
 
       store.commit("setUserManagerAddr", UserManagerAddr);
 

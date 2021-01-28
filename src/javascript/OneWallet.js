@@ -1,3 +1,5 @@
+
+
 class Onewallet {
   constructor() {
     this.isOneWallet = window.onewallet && window.onewallet.isOneWallet;
@@ -10,10 +12,18 @@ class Onewallet {
     this.isAuthorized = true;
   }
   signTransaction(txn) {
-    console.log("asjdnasljkndlask");
     if (this.isOneWallet) {
       return this.onewallet.signTransaction(txn);
     }
+  }
+
+  async signStakingTxn(txn){
+
+  txn.from = this.address
+
+  const signedTxn = await this.signTransaction(txn); //or you can call window.onewallet.signTransaction(txn) directly
+  const [sentTxn, txnHash] = await signedTxn.sendTransaction();
+  return [sentTxn, txnHash]
   }
 
   attachToContract(contract) {

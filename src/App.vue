@@ -5,9 +5,18 @@
       encouter here.
     </div>
     <div v-if="loggedIn">
-      <v-app-bar app class="green bar lighten-1">
+      <v-app-bar app fixed class="green bars lighten-1">
+        <v-app-bar-nav-icon
+         
+          @click.stop="drawer = !drawer"
+        ></v-app-bar-nav-icon>
+
         <v-toolbar-title
-          ><img width="150px" class="" src="./assets/openfitrans.png" />
+          ><img
+            width="150px"
+            class=""
+            src="./assets/openfitrans.png"
+          />
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
@@ -16,12 +25,15 @@
       </v-app-bar>
 
       <v-navigation-drawer
-        show
-        absolute
+      fixed
+      temporary
+      hide-overlay
         class="navigation grey navs lighten-4"
         bg-dark
-        ><br /><br /><br />
-        <v-container class="text-left pa-0 ">
+        v-model="drawer"
+        ><center><img width="60%" class="ma-0 pa-0" src="./assets/openfigreen.png"></center>
+ 
+        <v-container class="text-left">
           <v-card
             class="white lighten-1 grey--text bg-light"
             width="100%"
@@ -30,7 +42,7 @@
             <router-link
               to="/"
               class="list-group-item list-group-item-action grey--text text--darken-1"
-              >Dashboard<img
+              ><v-icon class="mr-3">mdi-home-analytics</v-icon>Dashboard<img
                 src="./assets/right-arrow.png"
                 height="20"
                 class="float-right"/></router-link
@@ -39,7 +51,7 @@
             ><router-link
               to="/Wallets"
               class="list-group-item list-group-item-action bg-light grey--text text--darken-2"
-              >Wallets<img
+              ><v-icon class="mr-3">mdi-wallet</v-icon>Wallets<img
                 src="./assets/right-arrow.png"
                 height="20"
                 class="float-right"/></router-link
@@ -48,7 +60,7 @@
             ><router-link
               to="/Transactions"
               class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
-              >Transactions<img
+              ><v-icon class="mr-3">mdi-send</v-icon>Transactions<img
                 src="./assets/right-arrow.png"
                 height="20"
                 class="float-right"/></router-link
@@ -61,7 +73,7 @@
               class="float-right"/><router-link
               to="/Exchanges"
               class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
-              >Exchanges
+              ><v-icon class="mr-3">mdi-cached</v-icon>Exchanges
               <img
                 src="./assets/right-arrow.png"
                 height="20"
@@ -72,7 +84,7 @@
             ><router-link
               to="/migrate"
               class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
-              >Migrate<img
+              ><v-icon class="mr-3">mdi-swap-horizontal</v-icon>Migrate<img
                 src="./assets/right-arrow.png"
                 height="20"
                 class="float-right"/></router-link
@@ -82,7 +94,7 @@
             ><router-link
               to="/Cards"
               class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
-              >Cards<img
+              ><v-icon class="mr-3">mdi-credit-card-multiple-outline</v-icon>Cards<img
                 src="./assets/right-arrow.png"
                 height="20"
                 class="float-right"/></router-link
@@ -92,7 +104,7 @@
             ><router-link
               to="/Pools"
               class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
-              >Liquidity Pools<img
+              ><v-icon class="mr-3">mdi-water-plus</v-icon>Liquidity Pools<img
                 src="./assets/right-arrow.png"
                 height="20"
                 class="float-right"/></router-link
@@ -101,7 +113,7 @@
             ><router-link
               to="/Delegations"
               class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
-              >Delegations<img
+              ><v-icon class="mr-3">mdi-cash-multiple</v-icon>Delegations<img
                 src="./assets/right-arrow.png"
                 height="20"
                 class="float-right"/></router-link
@@ -110,22 +122,23 @@
             ><router-link
               to="/validators"
               class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
-              >Validators<img
+              ><v-icon class="mr-3">mdi-cash-check</v-icon>Validators<img
                 src="./assets/right-arrow.png"
                 height="20"
                 class="float-right"/></router-link
           ></v-card>
           <v-card class="white lighten-1 " height="50"
             ><router-link
-              to="/Contracts"
+              to="/statistics"
               class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
-              >Contracts<img
+              ><v-icon class="mr-3">mdi-chart-bar-stacked</v-icon>Statistics<img
                 src="./assets/right-arrow.png"
                 height="20"
                 class="float-right"/></router-link
           ></v-card>
         </v-container>
-
+        <br><br><br><br><br><br><br><br>
+        <center><a @click="drawer = !drawer">close</a></center>
         <!--  -->
       </v-navigation-drawer>
 
@@ -218,4 +231,7 @@ export default {
 };
 </script>
 
-<style type="text/css"></style>
+
+<style type="text/css">
+
+</style>
