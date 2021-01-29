@@ -14,7 +14,8 @@
             v-bind:key="items.key"
           >
             <v-card-title class="small green truncate lighten-1">
-              <v-spacer></v-spacer><b> {{ items.name }} </b><v-spacer></v-spacer>
+              <v-spacer></v-spacer><b> {{ items.name }} </b
+              ><v-spacer></v-spacer>
             </v-card-title>
             <v-card-text>
               <br />
@@ -24,7 +25,8 @@
                   'https://api.stake.hmny.io/networks/mainnet/validators/' +
                     items.address +
                     '/avatar'
-                " onerror="javascript:this.src='https://www.pikpng.com/pngl/b/263-2631740_empty-avatar-png-user-png-clipart.png'"
+                "
+                onerror="javascript:this.src='https://www.pikpng.com/pngl/b/263-2631740_empty-avatar-png-user-png-clipart.png'"
               />
               <br />
 
@@ -35,93 +37,71 @@
               <br />
 
               {{ items.status }}
-                 <br />
-                 <v-divider></v-divider>
+              <br />
+              <v-divider></v-divider>
               <small>{{ items.details }} </small>
               <v-divider></v-divider>
-                               <br />
+              <br />
 
-         {{ items.rate }} %
+              {{ items.rate }} %
             </v-card-text>
-                          <v-spacer></v-spacer>
-             
-
-            
-<v-card-actions>
-	<v-spacer></v-spacer>
-             <v-container class="d-flex align-center">
-             	<v-row justify="center">
-             	    <v-dialog
-             	      v-model="dialogx"
-             	      
-             	      max-width="600px"
-             	    >
-             	      <template v-slot:activator="{ on, attrs }">
-             	        <v-btn
-             	          color="primary"
-             	          dark
-             	          v-bind="attrs"
-             	          v-on="on"
-             	        >
-             	          Delegate
-             	        </v-btn>
-             	      </template>
-             	      <v-card>
-             	        <v-card-title>
-             	          <span class="headline">Delegate</span>
-             	        </v-card-title>
-             	        <v-card-text>
-             	          <v-container>
-             	            <v-row>
-             	              <v-col
-             	                cols="12"
-             	                sm="12"
-             	                md="12"
-             	              >
-             	               Delegate to : {{items.name}}
-             	              </v-col>
-             	              <v-col
-             	                cols="12"
-             	                sm="12"
-             	                md="12"
-             	              >
-             	               Address : {{items.address}}
-             	              </v-col>
-             	              <v-col
-             	                cols="12"
-             	                sm="12"
-             	                md="12"
-             	              >Amount :  <v-text-field
-            v-model="amount"
-  			width="60%"
-            required
-          ></v-text-field>
-             	              	
-             	              </v-col>
-
-             	              
-             	            </v-row>
-
-             	          </v-container>
-             	          <small>*at this time you cant undelegate here (use harmony)</small>
-             	        </v-card-text>
-             	        <v-card-actions>
-             	          <v-spacer></v-spacer>
-
-             	          <v-btn
-             	            color="blue darken-1"
-             	            text
-             	            @click="delegate(items.address,amount)"
-             	          >
-             	            Send
-             	          </v-btn>
-             	        </v-card-actions>
-             	      </v-card>
-             	    </v-dialog>
-             	  </v-row>
-             </v-container>
             <v-spacer></v-spacer>
-       </v-card-actions> 
+
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-container class="d-flex align-center">
+                <v-row justify="center">
+                  <v-dialog v-model="dialogx" max-width="600px">
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-btn color="primary" dark v-bind="attrs" v-on="on">
+                        Delegate
+                      </v-btn>
+                    </template>
+                    <v-card>
+                      <v-card-title>
+                        <span class="headline">Delegate</span>
+                      </v-card-title>
+                      <v-card-text>
+                        <v-container>
+                          <v-row>
+                            <v-col cols="12" sm="12" md="12">
+                              Delegate to : {{ items.name }}
+                            </v-col>
+                            <v-col cols="12" sm="12" md="12">
+                              Address : {{ items.address }}
+                            </v-col>
+                            <v-col cols="12" sm="12" md="12"
+                              >Amount :
+                              <v-text-field
+                                v-model="amount"
+                                width="60%"
+                                required
+                              ></v-text-field>
+                            </v-col>
+                          </v-row>
+                        </v-container>
+                        <small
+                          >*at this time you cant undelegate here (use
+                          harmony)</small
+                        >
+                      </v-card-text>
+                      <v-card-actions>
+                        <v-spacer></v-spacer>
+
+                        <v-btn
+                          color="blue darken-1"
+                          text
+                          @click="delegate(items.address, amount)"
+                        >
+                          Send
+                        </v-btn>
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
+                </v-row>
+              </v-container>
+              <v-spacer></v-spacer>
+            </v-card-actions>
           </v-card>
         </v-row>
       </div>
@@ -134,17 +114,15 @@ import store from "../../store";
 
 import hmy from "../../javascript/hmy";
 const {
-
-
   numberToHex,
 
-  Unit,
-} = require('@harmony-js/utils');
+  Unit
+} = require("@harmony-js/utils");
 //const { Units, numToStr, fromWei } = require("@harmony-js/utils");
 //const { BN } = require("@harmony-js/crypto");
 
 export default {
-  name: "alltx",
+  name: "allvalidatiors",
   props: {
     msg: String
   },
@@ -198,43 +176,40 @@ export default {
         .then(response => response.text())
         .then(result => {
           const results = JSON.parse(result);
-          console.log(results)
+          console.log(results);
           var i = 0;
-          
+
           while (i < results.result.length) {
             //if (results.result[i]["active-status"] != "inactive") {
-              this.validatordata.push({
-                name: results.result[i].validator.name,
-                status: results.result[i]["active-status"],
-                pos_status: results.result[i]["epos-status"],
-                details: results.result[i].validator.details,
-                rate: results.result[i].validator.rate,
-                address: results.result[i].validator.address
-              });
+            this.validatordata.push({
+              name: results.result[i].validator.name,
+              status: results.result[i]["active-status"],
+              pos_status: results.result[i]["epos-status"],
+              details: results.result[i].validator.details,
+              rate: results.result[i].validator.rate,
+              address: results.result[i].validator.address
+            });
             //}
 
             i++;
           }
         })
         .catch(error => console.log("error", error));
-
-      
     },
-    delegate: async function(address, amount){
-    	hmy.stakings.setTxParams({
-    	  gasLimit: 25000,
-    	  gasPrice: numberToHex(new hmy.utils.Unit('1').asGwei().toWei()),
-    	  chainId: 1
-    	});
+    delegate: async function(address, amount) {
+      hmy.stakings.setTxParams({
+        gasLimit: 25000,
+        gasPrice: numberToHex(new hmy.utils.Unit("1").asGwei().toWei()),
+        chainId: 1
+      });
 
-    	const delegate = hmy.stakings.delegate({
-    	  delegatorAddress: store.state.address,
-    	  validatorAddress: address,
-    	  amount: numberToHex(new Unit(amount).asOne().toWei())
-    	});
-    	const delegateStakingTx = delegate.build();
-    	console.log(store.state.wallet.signStakingTxn(delegateStakingTx))
-
+      const delegate = hmy.stakings.delegate({
+        delegatorAddress: store.state.address,
+        validatorAddress: address,
+        amount: numberToHex(new Unit(amount).asOne().toWei())
+      });
+      const delegateStakingTx = delegate.build();
+      console.log(store.state.wallet.signStakingTxn(delegateStakingTx));
     }
   },
 
@@ -242,8 +217,7 @@ export default {
     return {
       blocknumber: null,
       isLoaded: false,
-      validatordata: [],
-   
+      validatordata: []
     };
   },
   mounted: async function() {
@@ -256,14 +230,11 @@ export default {
 </script>
 
 <style scoped>
-
 .card-actions {
-
-vertical-align: bottom;
-bottom: 0;
+  vertical-align: bottom;
+  bottom: 0;
 }
 .truncate {
-
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

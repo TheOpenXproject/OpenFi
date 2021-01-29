@@ -3,15 +3,18 @@
     <v-container>
       <h3>My Delegations :</h3>
       <br />
-      Coming soon
+      <mydelegations />
     </v-container>
   </div>
 </template>
 
 <script>
+import mydelegations from "../components/delegations/mydelegations.vue";
 export default {
   name: "Stake",
-  components: {}
+  components: {
+    mydelegations
+  }
 };
 </script>
 <style type="text/css"></style>

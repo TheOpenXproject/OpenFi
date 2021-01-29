@@ -6,17 +6,10 @@
     </div>
     <div v-if="loggedIn">
       <v-app-bar app fixed class="green bars lighten-1">
-        <v-app-bar-nav-icon
-         
-          @click.stop="drawer = !drawer"
-        ></v-app-bar-nav-icon>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
         <v-toolbar-title
-          ><img
-            width="150px"
-            class=""
-            src="./assets/openfitrans.png"
-          />
+          ><img width="150px" class="" src="./assets/openfitrans.png" />
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
@@ -25,14 +18,16 @@
       </v-app-bar>
 
       <v-navigation-drawer
-      fixed
-      temporary
-      hide-overlay
+        fixed
+        temporary
+        hide-overlay
         class="navigation grey navs lighten-4"
         bg-dark
         v-model="drawer"
-        ><center><img width="60%" class="ma-0 pa-0" src="./assets/openfigreen.png"></center>
- 
+        ><center>
+          <img width="60%" class="ma-0 pa-0" src="./assets/openfigreen.png" />
+        </center>
+
         <v-container class="text-left">
           <v-card
             class="white lighten-1 grey--text bg-light"
@@ -94,7 +89,8 @@
             ><router-link
               to="/Cards"
               class="list-group-item list-group-item-action bg-light grey--text text--darken-1"
-              ><v-icon class="mr-3">mdi-credit-card-multiple-outline</v-icon>Cards<img
+              ><v-icon class="mr-3">mdi-credit-card-multiple-outline</v-icon
+              >Cards<img
                 src="./assets/right-arrow.png"
                 height="20"
                 class="float-right"/></router-link
@@ -137,7 +133,7 @@
                 class="float-right"/></router-link
           ></v-card>
         </v-container>
-        <br><br><br><br><br><br><br><br>
+        <br /><br /><br /><br /><br /><br /><br /><br />
         <center><a @click="drawer = !drawer">close</a></center>
         <!--  -->
       </v-navigation-drawer>
@@ -231,7 +227,4 @@ export default {
 };
 </script>
 
-
-<style type="text/css">
-
-</style>
+<style type="text/css"></style>
