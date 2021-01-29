@@ -1,6 +1,6 @@
-#Master Todo
+# Master Todo
 
-##Validator
+## Validator
 - [x] Server Setup
 - [x] Server Security Implementation
 - [x] Node
@@ -8,26 +8,26 @@
 - [not funny] Get erected
 
 
-##landing page
+## landing page
 - [ ] Landing Page
 - [ ] Write litePaper
 - [ ] Write white paper
 
-##App
+## App
 
-###Wallets
+### Wallets
 - [ ] Fully include metamask Capabilities
 - [ ] add mathwallet capabilities
 - [ ] figure out hoz to sign contract tx with ledger
 - [ ] rewrite login procedure to accomodate above changes
 - [ ] write Core OneWallet compatability
 
-###Login/signup/migrate
+### Login/signup/migrate
 - [x] write login code
 - [x] write base of migrations
 - [ ] beautify migration on landing page
 
-###Dashboard
+### Dashboard
 - [x] dashboard base
 - [ ] balance history
 - [x] tx widget
@@ -35,19 +35,19 @@
 - [x] Some tokens
 - [ ] Add Ethereum balance compatibility
 
-###Transactions
+### Transactions
 - [x] transaction page base
 - [ ] rewire tx send with tags,msg,category
 
-###Exchanges
+### Exchanges
 - [ ] Add Uniswap SDK
 - [ ] link to Openfi Exchange
 - [ ] Link site to Swoop Exchange
 
-###Migrations
+### Migrations
 - [ ] code full migration with simple UI 
 
-###Cards
+### Cards
 - [ ] write down protocol thought over the last 5 monthes
 - [ ] design cards
 - [ ] add WebNFC Feature
@@ -57,11 +57,11 @@
 - [ ] code protocol. Duhhh
 
 
-###Liquidity
+### Liquidity
 - [ ] Link liquidity pools provided by OpenFi
 - [ ] Link Swoop
 
-###Delegations
+### Delegations
 - [ ] add more features to delegator
 		- [ ] Graphs
 		- [ ] Limits
@@ -69,7 +69,7 @@
 		- [ ] moar Stats
 		- [ ] Better UI fo real
 
-###Validators
+### Validators
 - [ ] add more features to delegator
 		- [ ] Graphs
 		- [ ] Limits
@@ -77,7 +77,7 @@
 		- [ ] moar Stats
 		- [ ] Better UI fo real
 
-###Stats
+### Stats
 - [ ] monthly/yearly/weekly stats
 - [ ] How much spent on Txs
 - [ ] Spent on Contracts/updates
@@ -86,12 +86,12 @@
 - [ ] Total funds in all linked Wallets
 - [ ] more...
 
-###Misc.
+### Misc.
 
 - [x] navigation
 - [ ] update readme
 
-##Contracts
+## Contracts
 - [x] write base contract for account management
 - [ ] add ownership to ^
 - [ ] write testing token contracts
@@ -104,7 +104,7 @@
 - [x] write base Manager factory
 - [x] write base manager Contract
 
-##Landing Page
+## Landing Page
 - [ ] simple ui explaining what this project is about.
 - [ ] Lots of SEO <- sorry Vue :'(
 - [ ] whitepaper
@@ -113,11 +113,11 @@
 - [ ] Link to App
 - [ ] 
 
-##Social
+## Social
 - [x] twitter account
 - [x] mail accounts pt1
 
-##NFC Module
+## NFC Module
 - [ ] publish paper about nfc logic
 - [ ] draw nfc microcontroller circuit
 - [x] get first prototype nfc writer
@@ -125,7 +125,7 @@
 - [ ] link WebUsb to rfid
 
 
-##Fiat Transfers
+## Fiat Transfers
 - [ ] Register Company
 - [ ] Search for compatible banks
 - [ ] open bank accounts
