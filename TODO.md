@@ -63,19 +63,19 @@
 
 ### Delegations
 - [ ] add more features to delegator
-		- [ ] Graphs
-		- [ ] Limits
-		- [ ] error message handling
-		- [ ] moar Stats
-		- [ ] Better UI fo real
+- [ ] Graphs
+- [ ] Limits
+- [ ] error message handling
+- [ ] moar Stats
+- [ ] Better UI fo real
 
 ### Validators
-- [ ] add more features to delegator
-		- [ ] Graphs
-		- [ ] Limits
-		- [ ] error message handling
-		- [ ] moar Stats
-		- [ ] Better UI fo real
+### add more features to delegator
+- [ ] Graphs
+- [ ] Limits
+- [ ] error message handling
+- [ ] moar Stats
+- [ ] Better UI fo real
 
 ### Stats
 - [ ] monthly/yearly/weekly stats
