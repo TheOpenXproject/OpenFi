@@ -189,7 +189,7 @@ export default {
         jsonrpc: "2.0",
         id: 1,
         method: "hmyv2_getDelegationsByDelegator",
-        params: ["one1dqm6nv6vfa8ks7mnprnchzsk6zggk9zcs44al7"]
+        params: [store.state.address]
       });
 
       var requestOptions = {
@@ -207,7 +207,7 @@ export default {
           for (var i = 0; i < results.result.length; i++) {
             const numstr = numToStr(results.result[i].amount)
             const Wei = new BN(numstr);
-            const expected = fromWei(Wei, Units.szabo);
+            const expected = fromWei(Wei, Units.one);
             const numstr1 = numToStr(results.result[i].reward)
             const Wei1 = new BN(numstr1);
             const expected1 = fromWei(Wei1, Units.szabo);
