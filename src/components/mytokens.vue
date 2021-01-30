@@ -59,6 +59,7 @@
 
 import store from "../store";
 
+
 export default {
   name: "mytokens",
   components: {},
@@ -70,12 +71,13 @@ export default {
       vtokenName: store.state.validatedtokens.name,
       vtokenBal: store.state.validatedtokens.balances,
       vtokenSymb: store.state.validatedtokens.symbol,
-      tokencolors: store.state.validatedtokens.colors
+      tokencolors: store.state.validatedtokens.colors,
     };
   },
   methods: {
     async mounted() {
       this.loaded = false;
+
     }
   }
 };

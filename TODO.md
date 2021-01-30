@@ -103,6 +103,10 @@
 - [x] write base Tx manager contract
 - [x] write base Manager factory
 - [x] write base manager Contract
+- [ ] write SRC_of_Truth conntract
+- [ ]
+- [ ]
+- [ ]
 
 ## Landing Page
 - [ ] simple ui explaining what this project is about.

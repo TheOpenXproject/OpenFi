@@ -53,25 +53,23 @@
                         validatordata[items.key].eposstatus
                       }}</v-col
                       ><v-divider></v-divider>
-                      <v-col cols="12" md="12" sm="12">Total Delegations : {{
-                        validatordata[items.key].totaldelegations
-                      }}</v-col
+                      <v-col cols="12" md="12" sm="12"
+                        >Total Delegations :
+                        {{ validatordata[items.key].totaldelegations }}</v-col
                       ><v-divider></v-divider>
 
-                      <v-col cols="12" md="12" sm="12">Amount : {{
-                        delegationdata[items.key].amount
-                      }}</v-col
+                      <v-col cols="12" md="12" sm="12"
+                        >Amount : {{ delegationdata[items.key].amount }}</v-col
                       ><v-divider></v-divider>
-                      <v-col cols="12" md="12" sm="12">Rewards : {{
-                        delegationdata[items.key].rewards
-                      }}</v-col
+                      <v-col cols="12" md="12" sm="12"
+                        >Rewards :
+                        {{ delegationdata[items.key].rewards }}</v-col
                       ><v-divider></v-divider>
                       <v-col cols="12" md="12" sm="12">{{
                         delegationdata[items.key].delegator
                       }}</v-col
                       ><v-divider></v-divider> </v-container
                   ></v-col>
-                  
                 </v-row>
               </v-card-text>
               <v-spacer></v-spacer>
@@ -81,51 +79,55 @@
                 <v-container class="d-flex align-center">
                   <v-row justify="center">
                     <v-dialog v-model="dialogx" max-width="600px">
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-btn color="white"  v-bind="attrs" v-on="on">
-                        unDelegate
-                      </v-btn>
-                    </template>
-                    <v-card>
-                      <v-card-title>
-                        <span class="headline">unDelegate</span>
-                      </v-card-title>
-                      <v-card-text>
-                        <v-container>
-                          <v-row>
-                            <v-col cols="12" sm="12" md="12">
-                              unDelegate from : {{ items.name }}
-                            </v-col>
-                            <v-col cols="12" sm="12" md="12">
-                              Address : {{ items.address }}
-                            </v-col>
-                            <v-col cols="12" sm="12" md="12"
-                              >Amount :
-                              <v-text-field
-                                v-model="amount"
-                                width="60%"
-                                required
-                              ></v-text-field>
-                            </v-col>
-                          </v-row>
-                        </v-container>
-                        <small
-                          >*use harmony for now</small
-                        >
-                      </v-card-text>
-                      <v-card-actions>
-                        <v-spacer></v-spacer>
-
-                        <v-btn
-                          color="blue darken-1"
-                          text
-                          @click="undelegate(validatordata[items.key].address, amount)"
-                        >
-                          Send
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-btn color="white" v-bind="attrs" v-on="on">
+                          unDelegate
                         </v-btn>
-                      </v-card-actions>
-                    </v-card>
-                  </v-dialog></v-row>
+                      </template>
+                      <v-card>
+                        <v-card-title>
+                          <span class="headline">unDelegate</span>
+                        </v-card-title>
+                        <v-card-text>
+                          <v-container>
+                            <v-row>
+                              <v-col cols="12" sm="12" md="12">
+                                unDelegate from : {{ items.name }}
+                              </v-col>
+                              <v-col cols="12" sm="12" md="12">
+                                Address : {{ items.address }}
+                              </v-col>
+                              <v-col cols="12" sm="12" md="12"
+                                >Amount :
+                                <v-text-field
+                                  v-model="amount"
+                                  width="60%"
+                                  required
+                                ></v-text-field>
+                              </v-col>
+                            </v-row>
+                          </v-container>
+                          <small>*use harmony for now</small>
+                        </v-card-text>
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+
+                          <v-btn
+                            color="blue darken-1"
+                            text
+                            @click="
+                              undelegate(
+                                validatordata[items.key].address,
+                                amount
+                              )
+                            "
+                          >
+                            Send
+                          </v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog></v-row
+                  >
                 </v-container>
                 <v-spacer></v-spacer>
               </v-card-actions>
