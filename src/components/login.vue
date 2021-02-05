@@ -79,7 +79,7 @@ import store from "../store";
 import hmy from "../javascript/hmy";
 import contractUserFactory from "../../build/contracts/UserFactory.json";
 import contractUserManager from "../../build/contracts/UserManager.json";
-const {tokens} = require("../javascript/BridgeTokenTruth.js");
+const { tokens } = require("../javascript/BridgeTokenTruth.js");
 //import UserTokenContract from "../../../../build/contracts/UserTokenContract.json";
 //import UserWalletContract from "../../../../build/contracts/UserWalletContract.json";
 //import UserBudgetContract from "../../../../build/contracts/UserBudgetContract.json";
@@ -101,14 +101,14 @@ export default {
       if (wallet_type == "LedgerWallet") {
         const wallet = new LedgerWallet();
         await wallet.signin();
-        
+
         store.commit("setUserAddress", wallet.address);
         store.commit("setUserWallet", wallet);
         await this.getUserContracts(wallet);
       } else if (wallet_type == "OneWallet") {
         const wallet = new OneWallet();
         await wallet.signin();
-        console.log(tokens.ETH)
+        console.log(tokens.ETH);
         store.commit("setUserAddress", wallet.address);
         store.commit("setUserWallet", wallet);
         await this.getUserContracts(wallet);
@@ -130,11 +130,11 @@ export default {
         .getUserContractAddress(zeroxAddr)
         .call();
       console.log(UserManagerAddr);
-      /* if (UserManagerAddr == "0x0000000000000000000000000000000000000000") {
+      if (UserManagerAddr == "0x0000000000000000000000000000000000000000") {
         await window.onewallet.forgetIdentity();
         this.loginError = true;
         return 1;
-      }*/
+      }
 
       store.commit("setUserManagerAddr", UserManagerAddr);
 

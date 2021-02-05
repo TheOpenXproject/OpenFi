@@ -3,7 +3,7 @@
 export const tokens = {
   ETH: {
     Symbol: "ETH",
-    Name: "Wrapped Ether",
+    name: "Wrapped Ether",
     ethAddress: "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
     ethImg: "",
     imgSrc: "https://openfi.dev/tokens/default/ETH.png",
@@ -570,4 +570,3 @@ WONE
 "totalSupply":"213021000000000000000000"
 */
 };
-

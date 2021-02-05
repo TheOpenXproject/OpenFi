@@ -132,6 +132,16 @@
                 height="20"
                 class="float-right"/></router-link
           ></v-card>
+          <v-card class="white lighten-1 " height="50"
+            ><router-link
+              to="/TokenTruth"
+              class="list-group-item list-group-item-action bg-light grey--text text--darken-2"
+              ><v-icon class="mr-3">mdi-help-circle-outline</v-icon>TokenTruth
+              Demo<img
+                src="./assets/right-arrow.png"
+                height="20"
+                class="float-right"/></router-link
+          ></v-card>
         </v-container>
         <br /><br /><br /><br /><br /><br /><br /><br />
         <center><a @click="drawer = !drawer">close</a></center>

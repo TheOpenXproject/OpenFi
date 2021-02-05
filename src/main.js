@@ -14,5 +14,14 @@ new Vue({
   router,
   store,
   vuetify,
+  created() {
+    document.addEventListener("beforeunload", this.handler);
+  },
+  methods: {
+    handler: async function handler() {
+      await window.onewallet.forgetIdentity();
+      store.state = {};
+    }
+  },
   render: h => h(App)
 }).$mount("#app");

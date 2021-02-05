@@ -20,6 +20,7 @@ export default new Vuex.Store({
     s3: null,
     totatonebal: null,
     OPENFI: "0xadf16A5aCDc8cD2e59b94d18A90878Ee5AD67031",
+    TokenTruthAddress: "0x2716Cec38a7eB5d119F7F17cE97b598810F12a8f",
     userManagerAddr: null,
     userWalletAddr: null,
     userBudgetAddr: null,
@@ -61,6 +62,17 @@ export default new Vuex.Store({
         "0xa0dc05F84A27FcCBD341305839019aB86576bc07"
       ],
       balances: [],
+      img: [
+        "https://openfi.dev/tokens/default/ONE.png",
+        "https://openfi.dev/tokens/default/BUSD.png",
+        "https://openfi.dev/tokens/default/WBTC.png",
+        "https://openfi.dev/tokens/default/ETH.png",
+        "https://openfi.dev/tokens/default/ONE.png",
+        "https://openfi.dev/tokens/default/LINK.png",
+        "https://openfi.dev/tokens/default/LINK.png",
+        "https://openfi.dev/tokens/default/AAVE.png",
+        "https://openfi.dev/tokens/default/YFI.png"
+      ],
       colors: [
         "#89cff0",
         "#EC407A",

@@ -16,15 +16,7 @@
           >
             <v-row class="mt-4" v-if="vtokenBal[index - 1] > 0">
               <v-col>
-                <v-btn
-                  class="ml-3"
-                  fab
-                  dark
-                  large
-                  :style="{ 'background-color': tokencolors[index - 1] }"
-                >
-                  {{ vtokenSymb[index - 1] }}
-                </v-btn>
+                <img class="ml-5" width="60px" :src="vtokenImg[index - 1]" />
               </v-col>
               <v-col>
                 <v-row class="pt-6">
@@ -59,7 +51,6 @@
 
 import store from "../store";
 
-
 export default {
   name: "mytokens",
   components: {},
@@ -72,12 +63,12 @@ export default {
       vtokenBal: store.state.validatedtokens.balances,
       vtokenSymb: store.state.validatedtokens.symbol,
       tokencolors: store.state.validatedtokens.colors,
+      vtokenImg: store.state.validatedtokens.img
     };
   },
   methods: {
     async mounted() {
       this.loaded = false;
-
     }
   }
 };
